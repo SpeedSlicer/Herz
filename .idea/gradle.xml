@@ -11,8 +11,8 @@
             <option value="$PROJECT_DIR$/mixins" />
             <option value="$PROJECT_DIR$/src" />
             <option value="$PROJECT_DIR$/src/test" />
-            <option value="$PROJECT_DIR$/src/test/testv" />
-            <option value="$PROJECT_DIR$/src/test/testv/test-inner" />
+            <option value="$PROJECT_DIR$/src/test/test-version" />
+            <option value="$PROJECT_DIR$/src/test/test-version/test-inner" />
           </set>
         </option>
         <option name="myGradleHome" value="" />

@@ -13,6 +13,9 @@ repositories {
 
 dependencies {
     implementation("net.lenni0451.classtransform:core:1.15.1")
+    implementation("net.lenni0451.classtransform:mixinstranslator:1.15.1")
+    implementation("net.lenni0451.classtransform:mixinsdummy:1.15.1")
+    implementation("net.lenni0451.classtransform:additionalclassprovider:1.15.1")
 }
 
 application {

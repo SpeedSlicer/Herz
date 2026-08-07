@@ -1,5 +1,6 @@
 rootProject.name = "Herz"
-include("src:test:testv")
-include("src:test:testv:test-inner")
 
+include("src:test:test-version:test-inner")
+
+include("src:test:test-version")
 include("mixins")
