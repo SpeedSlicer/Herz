@@ -1,0 +1,20 @@
+plugins {
+    java
+    application
+    id("com.gradleup.shadow") version "9.6.1"
+}
+
+group = "net.ada"
+version = "1.0-SNAPSHOT"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("net.lenni0451.classtransform:core:1.15.1")
+}
+
+application {
+    mainClass.set("net.ada.transformer.Main")
+}
