@@ -1,12 +1,12 @@
 {
   "targetPlatforms": [
-    "test/test-version"
+    "eagler/1.14"
   ],
   "required": true,
   "package": "net.ada.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ClientTransform"
+    "test.Example"
   ],
   "injectors": {
     "default": 1

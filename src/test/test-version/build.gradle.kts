@@ -25,6 +25,9 @@ repositories {
 dependencies {
     "compileOnly"("net.lenni0451.classtransform:core:1.15.1")
     "compileOnly"(project(":src:test:test-version:test-inner"))
+    "compileOnly"(("net.lenni0451.classtransform:mixinstranslator:1.15.1"))
+    "compileOnly"(("net.lenni0451.classtransform:mixinsdummy:1.15.1"))
+    "compileOnly"(("net.lenni0451.classtransform:additionalclassprovider:1.15.1"))
 }
 
 tasks.register<JavaExec>("transformClasses") {
@@ -34,10 +37,11 @@ tasks.register<JavaExec>("transformClasses") {
 
     classpath = mixinsTClasspath
 
-    mainClass.set("net.ada.mixins.transformer.Main")
+    mainClass.set("net.ada.mixins.transformer.Transformer")
     args(
         rootDir.resolve("src/test/test-version/test-inner/build/classes/java/main").absolutePath,
         rootDir.resolve("src/test/test-version/build/classes/java/main").absolutePath,
+        rootDir.resolve("src/test/test-version/package.json").absolutePath,
         rootDir.resolve("src/test/test-version/build/out/java/main").absolutePath
     )
 
