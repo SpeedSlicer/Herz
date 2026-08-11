@@ -4,12 +4,40 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/src/eag/1_8_8" name="eaglercraft-1_8-mixins">
+                <projects>
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
+                </projects>
+              </build>
+              <build path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" name="eaglercraft-1_8">
+                <projects>
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_lwjgl_desktop" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_javascript" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_wasm_gc" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/mixins" />
             <option value="$PROJECT_DIR$/src" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_lwjgl_desktop" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_javascript" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_wasm_gc" />
             <option value="$PROJECT_DIR$/src/test" />
             <option value="$PROJECT_DIR$/src/test/test-version" />
             <option value="$PROJECT_DIR$/src/test/test-version/test-inner" />
