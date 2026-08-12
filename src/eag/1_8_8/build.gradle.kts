@@ -24,11 +24,11 @@ java {
 sourceSets {
 	named("main") {
 		java.srcDirs(
-			"buildSource/src/main/java",
-			"buildSource/src/game/java",
-			"buildSource/src/protocol-game/java",
-			"buildSource/src/protocol-relay/java",
-			"buildSource/src/platform-api/java"
+			"eag-1_8/src/main/java",
+			"eag-1_8/src/game/java",
+			"eag-1_8/src/protocol-game/java",
+			"eag-1_8/src/protocol-relay/java",
+			"eag-1_8/src/platform-api/java"
 		)
 	}
 }
@@ -40,7 +40,7 @@ dependencies {
 tasks.withType<Jar> {
 	entryCompression = ZipEntryCompression.STORED
 	// TeaVM will fail if anything from platform-api is in the JAR
-	fileTree("buildSource/src/platform-api/java").visit {
+	fileTree("eag-1_8/src/platform-api/java").visit {
 		if (!isDirectory) {
 			if (path.endsWith(".java")) {
 				exclude(path.substring(0, path.length - 5) + ".class")
