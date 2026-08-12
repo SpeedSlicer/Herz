@@ -12,7 +12,9 @@ java {
 sourceSets {
 	named("main") {
 		java.srcDirs(
-			"../../eag-1_8/src/lwjgl/java"
+			"../../buildSource/src/lwjgl/java",
+			"src/java",
+			"../common/src/java"
 		)
 	}
 }
@@ -31,10 +33,10 @@ dependencies {
 	implementation("dev.onvoid.webrtc:webrtc-java:0.10.0")
 	implementation(
 		files(
-			"../../eag-1_8/desktopRuntime/codecjorbis-20101023.jar",
-			"../../eag-1_8/desktopRuntime/codecwav-20101023.jar",
-			"../../eag-1_8/desktopRuntime/soundsystem-20120107.jar",
-			"../../eag-1_8/desktopRuntime/UnsafeMemcpy.jar"
+			"../../buildSource/desktopRuntime/codecjorbis-20101023.jar",
+			"../../buildSource/desktopRuntime/codecwav-20101023.jar",
+			"../../buildSource/desktopRuntime/soundsystem-20120107.jar",
+			"../../buildSource/desktopRuntime/UnsafeMemcpy.jar"
 		)
 	)
 }
@@ -55,7 +57,7 @@ tasks.register<JavaExec>("eaglercraftDebugRuntime") {
 
 	jvmArgs = daArgs
 
-	workingDir = file("../../eag-1_8/desktopRuntime")
+	workingDir = file("../../buildSource/desktopRuntime")
 	systemProperties = mapOf(
 		"java.library.path" to workingDir.absolutePath
 	)

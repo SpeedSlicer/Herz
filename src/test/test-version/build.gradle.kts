@@ -2,14 +2,6 @@ plugins {
     java
 }
 
-val mixinT = project(":mixins")
-
-val mixinTSourceSets = mixinT.extensions.getByType<SourceSetContainer>()
-
-val mixinsTClasspath = mixinTSourceSets["main"].runtimeClasspath
-
-
-
 group = "net.ada"
 version = "1.0-SNAPSHOT"
 
@@ -28,21 +20,4 @@ dependencies {
     "compileOnly"(("net.lenni0451.classtransform:mixinstranslator:1.15.1"))
     "compileOnly"(("net.lenni0451.classtransform:mixinsdummy:1.15.1"))
     "compileOnly"(("net.lenni0451.classtransform:additionalclassprovider:1.15.1"))
-}
-
-tasks.register<JavaExec>("transformClasses") {
-    group="mixins"
-    dependsOn("build")
-    dependsOn(":mixins:classes")
-
-    classpath = mixinsTClasspath
-
-    mainClass.set("net.ada.mixins.transformer.Transformer")
-    args(
-        rootDir.resolve("src/test/test-version/test-inner/build/classes/java/main").absolutePath,
-        rootDir.resolve("src/test/test-version/build/classes/java/main").absolutePath,
-        rootDir.resolve("src/test/test-version/package.json").absolutePath,
-        rootDir.resolve("src/test/test-version/build/out/java/main").absolutePath
-    )
-
 }

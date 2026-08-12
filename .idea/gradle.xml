@@ -14,12 +14,12 @@
                   <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
                 </projects>
               </build>
-              <build path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" name="eaglercraft-1_8">
+              <build path="$PROJECT_DIR$/src/eag/1_8_8/buildSource" name="eaglercraft-workspace">
                 <projects>
-                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" />
-                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_lwjgl_desktop" />
-                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_javascript" />
-                  <project path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_wasm_gc" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/buildSource" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_lwjgl_desktop" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_teavm_javascript" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_teavm_wasm_gc" />
                 </projects>
               </build>
             </builds>
@@ -34,10 +34,10 @@
             <option value="$PROJECT_DIR$/src/eag/1_8_8" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
-            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" />
-            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_lwjgl_desktop" />
-            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_javascript" />
-            <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_wasm_gc" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/buildSource" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_lwjgl_desktop" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_teavm_javascript" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/buildSource/target_teavm_wasm_gc" />
             <option value="$PROJECT_DIR$/src/test" />
             <option value="$PROJECT_DIR$/src/test/test-version" />
             <option value="$PROJECT_DIR$/src/test/test-version/test-inner" />

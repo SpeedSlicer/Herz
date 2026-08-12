@@ -35,3 +35,27 @@ tasks.register<JavaExec>("generateExample") {
         rootDir.resolve("example/manifest/mixin.json").absolutePath
     )
 }
+
+fun TaskContainer.registerTransformerTask(
+    taskName: String,
+    srcPath: String,
+    addonPath: String,
+    mixinRefPath: String,
+    targetPath : String
+) {
+    register<JavaExec>(taskName) {
+        group = "mixins"
+        dependsOn("build")
+        dependsOn(":mixins:classes")
+
+        classpath = sourceSets["main"].runtimeClasspath
+        mainClass.set("net.ada.mixins.transformer.Transformer")
+
+        args(
+            rootDir.resolve(srcPath).absolutePath,
+            rootDir.resolve(addonPath).absolutePath,
+            rootDir.resolve(mixinRefPath).absolutePath,
+            rootDir.resolve(targetPath).absolutePath
+        )
+    }
+}
