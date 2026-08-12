@@ -5,30 +5,46 @@ import com.google.gson.GsonBuilder;
 import net.ada.manifest.MixinSourceObj;
 import net.lenni0451.classtransform.TransformerManager;
 import net.lenni0451.classtransform.additionalclassprovider.PathClassProvider;
+import net.lenni0451.classtransform.mixinstranslator.MixinsTranslator;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
-
+import net.lenni0451.classtransform.utils.tree.BasicClassProvider;
 public class Transformer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, URISyntaxException {
         System.out.println("Beginning Transformer");
+        Path jarPath = Path.of(
+                Transformer.class
+                        .getProtectionDomain()
+                        .getCodeSource()
+                        .getLocation()
+                        .toURI()
+        );
+
+        Path rootPath = jarPath.getParent().getParent();
+
         Gson gson = new GsonBuilder().create();
-        Path srcPath = Path.of(args[0]);
-        Path addonPath = Path.of(args[1]);
-        Path mixinRefPath = Path.of(args[2]);
-        Path targetPath = Path.of(args[3]);
+        //  TODO please replace this, i just suck at gradle atm~
+        Path srcPath = rootPath.resolve(args[0]).normalize();
+        Path addonPath = rootPath.resolve(args[1]).normalize();
+        Path mixinRefPath = rootPath.resolve(args[2]).normalize();
+        Path targetPath = rootPath.resolve(args[3]).normalize();
         System.out.println("srcPath: " + srcPath);
         System.out.println("addonPath: " + addonPath);
         System.out.println("mixinRefPath: " + mixinRefPath);
         System.out.println("targetPath: " + targetPath);
-        PathClassProvider provider = new PathClassProvider(addonPath);
+        BasicClassProvider javaProvider = new BasicClassProvider();
+        PathClassProvider srcProvider = new PathClassProvider(srcPath, javaProvider);
+        PathClassProvider provider = new PathClassProvider(addonPath, srcProvider);
         TransformerManager transformerManager = new TransformerManager(provider);
         MixinSourceObj mixinSourceObj = gson.fromJson(new String(Files.readAllBytes(mixinRefPath)), MixinSourceObj.class);
+        transformerManager.addTransformerPreprocessor(new MixinsTranslator());
         for(String mixin : mixinSourceObj.mixins()) {
              transformerManager.addTransformer(mixinSourceObj.mixinPackage() + "." + mixin);
         }
@@ -73,7 +89,8 @@ public class Transformer {
                 try {
                     Path pathName = addonSrc.relativize(path);
                     String className = convRelPathToJava(pathName.toString());
-                    return !className.startsWith(mixinPathName);
+                    return !className.equals(mixinPathName)
+                            && !className.startsWith(mixinPathName + ".");
                 }
                 catch (Exception e) {
                     System.out.println("Error: " + e.getMessage() + " run into while attempted to parse:" + addonSrc);

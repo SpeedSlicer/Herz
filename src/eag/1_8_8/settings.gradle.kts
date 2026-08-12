@@ -17,4 +17,6 @@ pluginManagement {
 
 rootProject.name = "eaglercraft-1_8-mixins"
 include("build-targets:common")
+include("build-targets:lwjgl")
+
 includeBuild("eag-1_8")

@@ -12,6 +12,7 @@
                   <project path="$PROJECT_DIR$/src/eag/1_8_8" />
                   <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets" />
                   <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets/common" />
+                  <project path="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
                 </projects>
               </build>
               <build path="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" name="eaglercraft-workspace">
@@ -34,6 +35,7 @@
             <option value="$PROJECT_DIR$/src/eag/1_8_8" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets/common" />
+            <option value="$PROJECT_DIR$/src/eag/1_8_8/build-targets/lwjgl" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_lwjgl_desktop" />
             <option value="$PROJECT_DIR$/src/eag/1_8_8/eag-1_8/target_teavm_javascript" />
