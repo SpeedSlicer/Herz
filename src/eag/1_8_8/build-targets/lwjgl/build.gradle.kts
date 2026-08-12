@@ -67,3 +67,18 @@ tasks.register<JavaExec>("eaglercraftDebugRuntime") {
 
 	mainClass = "net.lax1dude.eaglercraft.v1_8.internal.lwjgl.MainClass"
 }
+
+tasks.register<JavaExec>("mixin-1_8-lwjgl") {
+	group = "mixins"
+	dependsOn("build")
+	dependsOn(":mixins:classes")
+
+	classpath(files(rootDir.resolve("mixins/build/classes/java")))
+	mainClass.set("net.ada.mixins.transformer.Transformer")
+	args(
+		rootDir.resolve("src/eag/1_8_8/eag-1_8").absolutePath,
+		rootDir.resolve("addonPath").absolutePath,
+		rootDir.resolve("mixinRefPath").absolutePath,
+		rootDir.resolve("targetPath").absolutePath
+	)
+}
