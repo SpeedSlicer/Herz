@@ -35,6 +35,7 @@ sourceSets {
 
 dependencies {
 	implementation(libs.bundles.common)
+	implementation("net.lenni0451.classtransform:mixinsdummy:1.15.1")
 }
 
 tasks.withType<Jar> {

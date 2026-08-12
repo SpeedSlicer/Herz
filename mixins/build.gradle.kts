@@ -20,7 +20,7 @@ dependencies {
 }
 
 application {
-    mainClass.set("net.ada.transformer.Main")
+    mainClass.set("net.ada.mixins.transformer.Transformer")
 }
 
 tasks.register<JavaExec>("generateExample") {

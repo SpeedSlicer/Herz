@@ -16,6 +16,7 @@ import java.util.stream.Stream;
 
 public class Transformer {
     public static void main(String[] args) throws IOException {
+        System.out.println("Beginning Transformer");
         Gson gson = new GsonBuilder().create();
         Path srcPath = Path.of(args[0]);
         Path addonPath = Path.of(args[1]);
