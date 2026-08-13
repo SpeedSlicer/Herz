@@ -45,6 +45,7 @@ val javaLauncher = javaToolchains.launcherFor {
 }
 
 val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
+	dependsOn(tasks.named("compileJava"))
 	val javaExecutable = javaLauncher.get().executablePath.asFile
 
 	commandLine(
