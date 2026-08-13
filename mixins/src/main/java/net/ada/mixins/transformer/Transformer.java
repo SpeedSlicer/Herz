@@ -74,7 +74,6 @@ public class Transformer {
                             Files.createDirectories(output.getParent());
                             Files.write(output, transformed);
 
-                            System.out.println("Wrote: " + pathName);
                         }
                         catch (Exception e) {
                             System.out.println("Error: " + e.getMessage() + " run into while attempted to parse:" + path);
