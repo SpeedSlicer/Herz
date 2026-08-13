@@ -1,3 +1,5 @@
+val repoRoot = rootDir.resolve("..").resolve("..").resolve("..").canonicalFile
+
 plugins {
 	id("java")
 }
@@ -38,22 +40,28 @@ dependencies {
 	implementation("net.lenni0451.classtransform:mixinsdummy:1.15.1")
 }
 
-val applyMixins by tasks.registering(Exec::class) {
-	group = "build"
+val javaLauncher = javaToolchains.launcherFor {
+	languageVersion.set(JavaLanguageVersion.of(17))
+}
 
-	dependsOn(tasks.named("classes"))
-
-	workingDir = rootDir
+val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
+	val javaExecutable = javaLauncher.get().executablePath.asFile
 
 	commandLine(
-		"cmd",
-		"/c",
-		rootDir.resolve("build-targets/common/applyMixins.bat").absolutePath
+		javaExecutable,
+		"-jar",
+		repoRoot.resolve("build-tools/mixins-1.0-SNAPSHOT-all.jar"),
+
+		repoRoot.resolve("src/eag/1_8_8/build/classes/java/main"),
+		repoRoot.resolve("src/eag/1_8_8/build-targets/common/build/classes/java/main"),
+		repoRoot.resolve("src/eag/1_8_8/build-targets/common/build/resources/main/common-mixins.json"),
+		repoRoot.resolve("src/eag/1_8_8/build/classes/java/main")
 	)
 }
 
+
 tasks.withType<Jar> {
-	dependsOn(applyMixins)
+	dependsOn(applyCommonMixins)
 
 	entryCompression = ZipEntryCompression.STORED
 
