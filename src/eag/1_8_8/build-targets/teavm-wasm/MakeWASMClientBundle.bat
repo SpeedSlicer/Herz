@@ -1,4 +1,4 @@
 @echo off
-cd ../
-call gradlew target_teavm_wasm_gc:makeMainWasmClientBundle
+cd ../../
+call gradlew build-targets:teavm-wasm:makeMainWasmClientBundle
 pause

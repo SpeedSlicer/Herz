@@ -1,0 +1,15 @@
+{
+  "targetPlatforms": [
+    "eag/1_8_8/common"
+  ],
+  "required": true,
+  "package": "net.ada.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "default": 1
+  },
+  "refmap": "none"
+}

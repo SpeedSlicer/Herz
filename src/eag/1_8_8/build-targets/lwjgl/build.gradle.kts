@@ -29,8 +29,7 @@ dependencies {
     implementation("org.lwjgl:lwjgl-opengles")
     implementation("org.java-websocket:Java-WebSocket:1.6.0")
     implementation("dev.onvoid.webrtc:webrtc-java:0.10.0")
-    implementation("net.lenni0451.classtransform:core:1.15.1")
-
+    implementation(project(":"))
     implementation(
         files(
             "../../eag-1_8/desktopRuntime/codecjorbis-20101023.jar",
@@ -41,7 +40,7 @@ dependencies {
     )
 }
 
-tasks.register<JavaExec>("eaglercraftDebugRuntime-lwjgl") {
+tasks.register<JavaExec>("eaglercraftDebugRuntime") {
     group = "desktopruntime"
     description = "Runs the desktop runtime"
     classpath += sourceSets["main"].runtimeClasspath

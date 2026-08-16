@@ -1,7 +1,7 @@
 val repoRoot = rootDir.resolve("..").resolve("..").resolve("..").canonicalFile
 
 plugins {
-	id("java")
+	id("java-library")
 }
 
 allprojects {
@@ -37,7 +37,8 @@ sourceSets {
 
 dependencies {
 	implementation(libs.bundles.common)
-	implementation("net.lenni0451.classtransform:mixinsdummy:1.15.1")
+	api("net.lenni0451.classtransform:mixinsdummy:1.15.1")
+	api("net.lenni0451.classtransform:core:1.15.1")
 }
 
 val javaLauncher = javaToolchains.launcherFor {

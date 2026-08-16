@@ -11,6 +11,6 @@ repositories {
 
 dependencies {
     implementation(rootProject)
-    implementation("net.lenni0451.classtransform:mixinsdummy:1.15.1")
+    implementation(project(":"))
 }
 

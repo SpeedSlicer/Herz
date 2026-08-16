@@ -40,7 +40,7 @@ dependencies {
     implementation(rootProject)
     implementation(libs.jorbis)
     implementation(libs.bundles.common)
-    implementation("net.lenni0451.classtransform:core:1.15.1")
+    implementation(project(":"))
 
 }
 
