@@ -58,8 +58,14 @@ val javaLauncher = javaToolchains.launcherFor {
 	languageVersion.set(JavaLanguageVersion.of(17))
 }
 
+val syncHerzAssets by tasks.registering(Sync::class) {
+	from(file("../../resources/assets/herz"))
+	into(file("../../eag-1_8/desktopRuntime/assets/herz"))
+}
+
 val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
 	dependsOn(":build-targets:common:classes")
+
 	val javaExecutable = javaLauncher.get().executablePath.asFile
 
 	commandLine(
@@ -76,6 +82,7 @@ val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
 
 
 tasks.withType<Jar> {
+	dependsOn(syncHerzAssets)
 	dependsOn(applyCommonMixins)
 
 	entryCompression = ZipEntryCompression.STORED

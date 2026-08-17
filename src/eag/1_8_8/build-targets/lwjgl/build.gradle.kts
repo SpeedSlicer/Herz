@@ -41,12 +41,12 @@ dependencies {
     )
 }
 
+
+
 tasks.register<JavaExec>("eaglercraftDebugRuntime") {
     group = "desktopruntime"
     description = "Runs the desktop runtime"
     classpath += sourceSets["main"].runtimeClasspath
-
-
 
     val daArgs: MutableList<String> = mutableListOf(
         "-Xmx1G",

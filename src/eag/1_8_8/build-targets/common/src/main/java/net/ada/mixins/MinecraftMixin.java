@@ -328,9 +328,10 @@ public class MinecraftMixin {
                 + "        </div>\n"
                 + "    </div>\n"
                 + "</div>\n");
-
-        test.flush();
-
         client.getClientAPI().getWebGUIPlatform().addGUI(test);
+        test.flush();
+        client.getClientAPI().getWebGUIPlatform().addClickListener("myButton", () -> {
+            System.out.println("Button Listener Works!");
+        });
     }
 }

@@ -2,7 +2,10 @@ package net.ada.api.impl.webgui;
 
 import net.ada.api.webgui.IWebGUI;
 import net.ada.api.webgui.IWebGUIPlatform;
+import net.ada.api.webgui.listener.IWebGUIClickListener;
 import org.teavm.jso.JSBody;
+import org.teavm.jso.browser.Window;
+import org.teavm.jso.dom.html.HTMLElement;
 
 import java.util.HashMap;
 
@@ -88,4 +91,22 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
             String css,
             String id
     );
+
+    @Override
+    public void addClickListener(
+            String elementId,
+            IWebGUIClickListener listener
+    ) {
+        HTMLElement element = Window.current()
+                .getDocument()
+                .getElementById(elementId);
+
+        if (element == null) {
+            throw new IllegalArgumentException(
+                    "Element not found: " + elementId
+            );
+        }
+
+        element.addEventListener("click", event -> listener.onClick());
+    }
 }
