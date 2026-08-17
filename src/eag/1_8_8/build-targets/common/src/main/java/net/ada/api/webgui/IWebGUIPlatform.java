@@ -11,4 +11,7 @@ public interface IWebGUIPlatform {
     void addClickListener(
             String elementId,
             IWebGUIClickListener listener
-    );}
+    );
+
+    String getValueFromTextbox(String elementID);
+}

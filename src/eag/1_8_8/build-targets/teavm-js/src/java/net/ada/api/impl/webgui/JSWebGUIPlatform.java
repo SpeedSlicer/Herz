@@ -5,7 +5,9 @@ import net.ada.api.webgui.IWebGUIPlatform;
 import net.ada.api.webgui.listener.IWebGUIClickListener;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
+import org.teavm.jso.dom.html.HTMLDocument;
 import org.teavm.jso.dom.html.HTMLElement;
+import org.teavm.jso.dom.html.HTMLInputElement;
 
 import java.util.HashMap;
 
@@ -61,28 +63,41 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
             params = { "html", "js", "css", "id" },
             script =
                     "var gui = document.getElementById(id);" +
-                            "if (gui === null) {" +
-                            "    console.error('GUI container not found:', id);" +
+                            "if (!gui) {" +
+                            "    console.error('GUI container not found: ' + id);" +
                             "    return;" +
                             "}" +
 
-                            "gui.innerHTML = html == null ? '' : html;" +
-
                             "var styleId = id + '-component-style';" +
-                            "var styleElement = document.getElementById(styleId);" +
-                            "if (styleElement === null) {" +
-                            "    styleElement = document.createElement('style');" +
-                            "    styleElement.id = styleId;" +
-                            "    document.head.appendChild(styleElement);" +
-                            "}" +
-                            "styleElement.textContent = css == null ? '' : css;" +
+                            "var scriptId = id + '-component-script';" +
 
-                            "if (js != null && js.length > 0) {" +
-                            "    try {" +
-                            "        (new Function('gui', js))(gui);" +
-                            "    } catch (error) {" +
-                            "        console.error('GUI script failed for ' + id, error);" +
-                            "    }" +
+                            "var oldStyle = document.getElementById(styleId);" +
+                            "if (oldStyle) {" +
+                            "    oldStyle.parentNode.removeChild(oldStyle);" +
+                            "}" +
+
+                            "var oldScript = document.getElementById(scriptId);" +
+                            "if (oldScript) {" +
+                            "    oldScript.parentNode.removeChild(oldScript);" +
+
+
+
+                            "}" +
+
+                            "gui.innerHTML = html || '';" +
+
+                            "var styleElement = document.createElement('style');" +
+                            "styleElement.id = styleId;" +
+                            "styleElement.type = 'text/css';" +
+                            "styleElement.textContent = css || '';" +
+                            "document.head.appendChild(styleElement);" +
+
+                            "if (js) {" +
+                            "    var scriptElement = document.createElement('script');" +
+                            "    scriptElement.id = scriptId;" +
+                            "    scriptElement.type = 'text/javascript';" +
+                            "    scriptElement.textContent = js;" +
+                            "    document.body.appendChild(scriptElement);" +
                             "}"
     )
     private static native void updateGUI(
@@ -108,5 +123,14 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
         }
 
         element.addEventListener("click", event -> listener.onClick());
+    }
+
+    @Override
+    public String getValueFromTextbox(String elementID) {
+        HTMLDocument document = HTMLDocument.current();
+
+        HTMLInputElement myTextBox = (HTMLInputElement) document.getElementById(elementID);
+
+        return myTextBox.getValue();
     }
 }

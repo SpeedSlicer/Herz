@@ -18,9 +18,9 @@ public class MinecraftMixin {
 
         var test = client.getClientAPI().getWebGUIPlatform().generateGUIObject("test");
 
-        test.setCSSComponent(EagRuntime.getResourceString("herz:gui/test/test.css"));
-        test.setJSComponent(EagRuntime.getResourceString("herz:gui/test/test.js"));
-        test.setHTMLComponent(EagRuntime.getResourceString("herz:gui/test/test.html"));
+        test.setCSSComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.css"));
+        test.setJSComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.js"));
+        test.setHTMLComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.html"));
 
 
         client.getClientAPI().getWebGUIPlatform().addGUI(test);

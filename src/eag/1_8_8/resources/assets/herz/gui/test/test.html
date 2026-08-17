@@ -1,0 +1,52 @@
+    <div id="dragBox">
+        <div id="dragHandle">Test Panel</div>
+
+        <div class="panelContent">
+            <label for="textInput">Text</label>
+            <input id="textInput" type="text" placeholder="Enter text">
+
+            <button id="myButton">Click me</button>
+
+            <label for="opacitySlider">
+                Translucency: <span id="opacityValue">65%</span>
+            </label>
+            <input
+                    id="opacitySlider"
+                    type="range"
+                    min="10"
+                    max="100"
+                    value="65"
+            >
+
+            <label for="blurSlider">
+                Blur: <span id="blurValue">16px</span>
+            </label>
+            <input
+                    id="blurSlider"
+                    type="range"
+                    min="0"
+                    max="40"
+                    value="16"
+            >
+
+            <div class="exampleText">
+                This area is a test
+                demonstrate the features
+            </div>
+
+            <div id="palette" aria-label="Color palette">
+                <button class="color active" data-color="#4f46e5" style="--swatch:#4f46e5" title="Indigo"></button>
+                <button class="color" data-color="#7c3aed" style="--swatch:#7c3aed" title="Purple"></button>
+                <button class="color" data-color="#db2777" style="--swatch:#db2777" title="Pink"></button>
+                <button class="color" data-color="#dc2626" style="--swatch:#dc2626" title="Red"></button>
+                <button class="color" data-color="#ea580c" style="--swatch:#ea580c" title="Orange"></button>
+                <button class="color" data-color="#ca8a04" style="--swatch:#ca8a04" title="Yellow"></button>
+                <button class="color" data-color="#16a34a" style="--swatch:#16a34a" title="Green"></button>
+                <button class="color" data-color="#0d9488" style="--swatch:#0d9488" title="Teal"></button>
+                <button class="color" data-color="#0284c7" style="--swatch:#0284c7" title="Blue"></button>
+                <button class="color" data-color="#334155" style="--swatch:#334155" title="Slate"></button>
+                <button class="color" data-color="#111827" style="--swatch:#111827" title="Black"></button>
+                <button class="color" data-color="#f1f5f9" style="--swatch:#f1f5f9" title="White"></button>
+            </div>
+        </div>
+    </div>

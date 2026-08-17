@@ -1,0 +1,156 @@
+.herz-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+#dragBox {
+    --panel-rgb: 79, 70, 229;
+    --panel-opacity: 0.65;
+    --panel-blur: 16px;
+
+    position: absolute;
+    left: 100px;
+    top: 100px;
+    width: 280px;
+    max-height: min(480px, calc(100vh - 20px));
+    overflow: hidden;
+
+    color: white;
+    background: rgba(var(--panel-rgb), var(--panel-opacity));
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+
+    backdrop-filter: blur(var(--panel-blur));
+    -webkit-backdrop-filter: blur(var(--panel-blur));
+
+    pointer-events: auto;
+    font-family: Arial, sans-serif;
+}
+
+#dragHandle {
+    padding: 14px 16px;
+    font-weight: bold;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#dragHandle:active {
+    cursor: grabbing;
+}
+
+.panelContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 390px;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+/* Scrollbar */
+.panelContent {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.8) rgba(0, 0, 0, 0.2);
+}
+
+.panelContent::-webkit-scrollbar {
+    width: 9px;
+}
+
+.panelContent::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.panelContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+}
+
+.panelContent label {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+#textInput {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+
+    color: white;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 8px;
+    outline: none;
+}
+
+#textInput::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+#textInput:focus {
+    border-color: white;
+}
+
+#myButton {
+    padding: 10px 14px;
+    color: #111827;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.9);
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#myButton:hover {
+    background: white;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: white;
+    cursor: pointer;
+}
+
+.exampleText {
+    min-height: 90px;
+    padding: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, 0.18);
+    border-radius: 8px;
+}
+
+#palette {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+#palette .color {
+    aspect-ratio: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+
+    background: var(--swatch);
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#palette .color:hover {
+    transform: scale(1.12);
+}
+
+#palette .color.active {
+    border-color: white;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.35);
+}
