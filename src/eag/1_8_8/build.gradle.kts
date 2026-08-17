@@ -41,12 +41,26 @@ dependencies {
 	api("net.lenni0451.classtransform:core:1.15.1")
 }
 
+
+val unprocessedClasses = configurations.create("unprocessedClasses") {
+	isCanBeConsumed = true
+	isCanBeResolved = false
+	extendsFrom(configurations.api.get())
+}
+
+artifacts {
+	add(unprocessedClasses.name, layout.buildDirectory.dir("classes/java/main")) {
+		builtBy(tasks.named("compileJava"))
+	}
+}
+
 val javaLauncher = javaToolchains.launcherFor {
 	languageVersion.set(JavaLanguageVersion.of(17))
 }
 
 val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
 	dependsOn(tasks.named("compileJava"))
+	dependsOn(":build-targets:common:classes")
 	val javaExecutable = javaLauncher.get().executablePath.asFile
 
 	commandLine(
@@ -56,7 +70,7 @@ val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
 
 		repoRoot.resolve("src/eag/1_8_8/build/classes/java/main"),
 		repoRoot.resolve("src/eag/1_8_8/build-targets/common/build/classes/java/main"),
-		repoRoot.resolve("src/eag/1_8_8/build-targets/common/build/resources/main/common-mixins.json"),
+		repoRoot.resolve("src/eag/1_8_8/build-targets/common/build/resources/main/mixin-targets.json"),
 		repoRoot.resolve("src/eag/1_8_8/build/classes/java/main")
 	)
 }

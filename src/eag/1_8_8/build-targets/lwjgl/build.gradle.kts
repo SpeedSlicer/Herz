@@ -12,8 +12,9 @@ java {
 sourceSets {
     named("main") {
         java.srcDirs(
-            "../../eag-1_8/src/lwjgl/java"
-        )
+            "../../eag-1_8/src/lwjgl/java",
+            "src/java",
+            )
     }
 }
 

@@ -18,7 +18,10 @@ java {
 sourceSets {
     named("main") {
         java.srcDirs(
-            "../../eag-1_8/src/wasm-gc-teavm/java"
+            "../../eag-1_8/src/wasm-gc-teavm/java",
+            "../teavm/src/common/java",
+            "src/java",
+
         )
         resources.srcDirs(
             "../../eag-1_8/src/teavm/resources"
