@@ -328,7 +328,7 @@ public class MinecraftMixin {
                 + "        </div>\n"
                 + "    </div>\n"
                 + "</div>\n");
-        
+
         test.flush();
 
         client.getClientAPI().getWebGUIPlatform().addGUI(test);

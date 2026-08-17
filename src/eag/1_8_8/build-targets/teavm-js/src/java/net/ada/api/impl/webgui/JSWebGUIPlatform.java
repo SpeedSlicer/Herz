@@ -13,12 +13,11 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     }
 
     @Override
-    public IWebGUI addGUI(IWebGUI gui) {
+    public void addGUI(IWebGUI gui) {
         webGUIs.put(gui.getID(), gui);
         createGUIDiv(gui.getID());
         gui.attach(this);
         gui.flush();
-        return gui;
     }
 
     @Override
