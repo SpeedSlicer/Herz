@@ -59,8 +59,8 @@ val javaLauncher = javaToolchains.launcherFor {
 }
 
 val syncHerzAssets by tasks.registering(Sync::class) {
-	from(file("../../resources/assets/herz"))
-	into(file("../../eag-1_8/desktopRuntime/assets/herz"))
+	from(file("resources/assets/herz"))
+	into(file("eag-1_8/desktopRuntime/resources/assets/herz"))
 }
 
 val applyCommonMixins = tasks.register<Exec>("applyCommonMixins") {
