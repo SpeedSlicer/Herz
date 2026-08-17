@@ -22,9 +22,28 @@ dependencies {
     implementation(project(path = ":", configuration = "unprocessedClasses"))
 }
 
+val platformApiClassPatterns = fileTree("src/platform-api/java")
+    .matching { include("**/*.java") }
+    .files
+    .map { sourceFile ->
+        val relativePath = sourceFile.relativeTo(file("src/platform-api/java"))
+            .invariantSeparatorsPath
+            .removeSuffix(".java")
+        "$relativePath*.class"
+    }
+
+tasks.named<JavaCompile>("compileJava") {
+    doLast {
+        delete(fileTree(destinationDirectory) {
+            platformApiClassPatterns.forEach(::include)
+        })
+    }
+}
+
 tasks.withType<Jar> {
     entryCompression = ZipEntryCompression.STORED
     // TeaVM will fail if anything from platform-api is in the JAR
+
     fileTree("src/platform-api/java").visit {
         if (!isDirectory) {
             if (path.endsWith(".java")) {
@@ -33,4 +52,3 @@ tasks.withType<Jar> {
         }
     }
 }
-

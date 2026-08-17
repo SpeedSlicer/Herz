@@ -11,11 +11,13 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     public JSWebGUIPlatform() {
         webGUIs = new HashMap<>();
     }
+
     @Override
     public IWebGUI addGUI(IWebGUI gui) {
         webGUIs.put(gui.getID(), gui);
-        gui.attach(this);
         createGUIDiv(gui.getID());
+        gui.attach(this);
+        gui.flush();
         return gui;
     }
 
@@ -57,38 +59,28 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
             params = { "html", "js", "css", "id" },
             script =
                     "var gui = document.getElementById(id);" +
-                            "if (!gui) {" +
-                            "    console.error('GUI container not found: ' + id);" +
+                            "if (gui === null) {" +
+                            "    console.error('GUI container not found:', id);" +
                             "    return;" +
                             "}" +
 
+                            "gui.innerHTML = html == null ? '' : html;" +
+
                             "var styleId = id + '-component-style';" +
-                            "var scriptId = id + '-component-script';" +
-
-                            "var oldStyle = document.getElementById(styleId);" +
-                            "if (oldStyle) {" +
-                            "    oldStyle.parentNode.removeChild(oldStyle);" +
+                            "var styleElement = document.getElementById(styleId);" +
+                            "if (styleElement === null) {" +
+                            "    styleElement = document.createElement('style');" +
+                            "    styleElement.id = styleId;" +
+                            "    document.head.appendChild(styleElement);" +
                             "}" +
+                            "styleElement.textContent = css == null ? '' : css;" +
 
-                            "var oldScript = document.getElementById(scriptId);" +
-                            "if (oldScript) {" +
-                            "    oldScript.parentNode.removeChild(oldScript);" +
-                            "}" +
-
-                            "gui.innerHTML = html || '';" +
-
-                            "var styleElement = document.createElement('style');" +
-                            "styleElement.id = styleId;" +
-                            "styleElement.type = 'text/css';" +
-                            "styleElement.textContent = css || '';" +
-                            "document.head.appendChild(styleElement);" +
-
-                            "if (js) {" +
-                            "    var scriptElement = document.createElement('script');" +
-                            "    scriptElement.id = scriptId;" +
-                            "    scriptElement.type = 'text/javascript';" +
-                            "    scriptElement.textContent = js;" +
-                            "    document.body.appendChild(scriptElement);" +
+                            "if (js != null && js.length > 0) {" +
+                            "    try {" +
+                            "        (new Function('gui', js))(gui);" +
+                            "    } catch (error) {" +
+                            "        console.error('GUI script failed for ' + id, error);" +
+                            "    }" +
                             "}"
     )
     private static native void updateGUI(
