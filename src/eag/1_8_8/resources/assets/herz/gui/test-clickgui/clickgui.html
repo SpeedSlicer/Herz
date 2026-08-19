@@ -1,0 +1,788 @@
+<div id="herz-clickgui-root">
+
+    <div class="hz-ambient hz-ambient-a"></div>
+    <div class="hz-ambient hz-ambient-b"></div>
+    <div class="hz-ambient hz-ambient-c"></div>
+
+    <div class="hz-backdrop"></div>
+
+    <section id="hz-window" class="hz-window">
+
+        <!-- TOP BAR -->
+        <header id="hz-drag-handle" class="hz-topbar">
+
+            <div class="hz-brand">
+                <div class="hz-brand-logo">
+                    <span>H</span>
+                </div>
+
+                <div class="hz-brand-copy">
+                    <div class="hz-brand-name">HERZ</div>
+                    <div class="hz-brand-version">WEB CLIENT</div>
+                </div>
+            </div>
+
+            <div class="hz-topbar-center">
+                <div class="hz-search">
+                    <span class="hz-search-icon">⌕</span>
+
+                    <input
+                            id="hz-search"
+                            type="text"
+                            placeholder="Search modules..."
+                            autocomplete="off"
+                    >
+
+                    <span class="hz-search-shortcut">/</span>
+                </div>
+            </div>
+
+            <div class="hz-topbar-actions">
+
+                <div class="hz-connection">
+                    <span></span>
+                    Online
+                </div>
+
+                <button
+                        id="hz-open-bind"
+                        class="hz-key-button"
+                        data-bind-target="gui"
+                        title="Change ClickGUI key"
+                >
+                    RSHIFT
+                </button>
+
+                <button
+                        id="hz-close"
+                        class="hz-icon-button hz-close"
+                        title="Close"
+                >
+                    ×
+                </button>
+
+            </div>
+        </header>
+
+
+        <div class="hz-layout">
+
+            <!-- SIDEBAR -->
+            <aside class="hz-sidebar">
+
+                <div class="hz-sidebar-label">
+                    MODULES
+                </div>
+
+                <nav class="hz-categories">
+
+                    <button
+                            class="hz-category active"
+                            data-category="combat"
+                    >
+                        <span class="hz-category-icon">◇</span>
+                        <span>Combat</span>
+                        <span class="hz-category-count">2</span>
+                    </button>
+
+                    <button
+                            class="hz-category"
+                            data-category="movement"
+                    >
+                        <span class="hz-category-icon">➤</span>
+                        <span>Movement</span>
+                        <span class="hz-category-count">2</span>
+                    </button>
+
+                    <button
+                            class="hz-category"
+                            data-category="player"
+                    >
+                        <span class="hz-category-icon">◌</span>
+                        <span>Player</span>
+                        <span class="hz-category-count">2</span>
+                    </button>
+
+                    <button
+                            class="hz-category"
+                            data-category="render"
+                    >
+                        <span class="hz-category-icon">◉</span>
+                        <span>Render</span>
+                        <span class="hz-category-count">2</span>
+                    </button>
+
+                    <button
+                            class="hz-category"
+                            data-category="client"
+                    >
+                        <span class="hz-category-icon">✦</span>
+                        <span>Client</span>
+                        <span class="hz-category-count">2</span>
+                    </button>
+
+                </nav>
+
+                <div class="hz-sidebar-spacer"></div>
+
+                <div class="hz-sidebar-card">
+
+                    <div class="hz-sidebar-card-icon">
+                        ✦
+                    </div>
+
+                    <div>
+                        <div class="hz-sidebar-card-title">
+                            Herz Client
+                        </div>
+
+                        <div class="hz-sidebar-card-subtitle">
+                            TeaVM WebGUI
+                        </div>
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- CONTENT -->
+            <main class="hz-content">
+
+                <section class="hz-content-heading">
+
+                    <div>
+                        <div class="hz-eyebrow">
+                            MODULE COLLECTION
+                        </div>
+
+                        <h1 id="hz-category-title">
+                            Combat
+                        </h1>
+
+                        <p id="hz-category-description">
+                            Combat automation and interaction modules.
+                        </p>
+                    </div>
+
+                    <div class="hz-heading-pill">
+                        <span id="hz-visible-count">2</span>
+                        modules
+                    </div>
+
+                </section>
+
+
+                <div id="hz-module-grid" class="hz-module-grid">
+
+                    <!-- KillAura -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="combat"
+                            data-name="killaura kill aura combat"
+                            data-module="killaura"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                K
+                            </div>
+
+                            <button
+                                    id="module-killaura"
+                                    class="hz-toggle"
+                                    data-module="killaura"
+                                    aria-pressed="false"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+
+                            <h3>KillAura</h3>
+
+                            <p>
+                                Automatically attacks valid nearby entities.
+                            </p>
+
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="killaura"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Velocity -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="combat"
+                            data-name="velocity knockback combat"
+                            data-module="velocity"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                V
+                            </div>
+
+                            <button
+                                    id="module-velocity"
+                                    class="hz-toggle"
+                                    data-module="velocity"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>Velocity</h3>
+
+                            <p>
+                                Adjust incoming knockback and movement response.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="velocity"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Flight -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="movement"
+                            data-name="flight fly movement"
+                            data-module="flight"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                F
+                            </div>
+
+                            <button
+                                    id="module-flight"
+                                    class="hz-toggle"
+                                    data-module="flight"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>Flight</h3>
+
+                            <p>
+                                Enhanced airborne movement controls.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="flight"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Sprint -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="movement"
+                            data-name="sprint movement"
+                            data-module="sprint"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                S
+                            </div>
+
+                            <button
+                                    id="module-sprint"
+                                    class="hz-toggle"
+                                    data-module="sprint"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>Sprint</h3>
+
+                            <p>
+                                Automatically maintains sprint while moving.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="sprint"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- NoSlow -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="player"
+                            data-name="noslow player"
+                            data-module="noslow"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                N
+                            </div>
+
+                            <button
+                                    id="module-noslow"
+                                    class="hz-toggle"
+                                    data-module="noslow"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>NoSlow</h3>
+
+                            <p>
+                                Adjust slowdown behavior while using items.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="noslow"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Inventory Manager -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="player"
+                            data-name="inventory manager player"
+                            data-module="inventory"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                I
+                            </div>
+
+                            <button
+                                    id="module-inventory"
+                                    class="hz-toggle"
+                                    data-module="inventory"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>Inventory Manager</h3>
+
+                            <p>
+                                Organizes inventory and item placement.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="inventory"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ESP -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="render"
+                            data-name="esp render entities"
+                            data-module="esp"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                E
+                            </div>
+
+                            <button
+                                    id="module-esp"
+                                    class="hz-toggle"
+                                    data-module="esp"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>ESP</h3>
+
+                            <p>
+                                Highlights selected entities in the world.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="esp"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Fullbright -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="render"
+                            data-name="fullbright brightness render"
+                            data-module="fullbright"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                B
+                            </div>
+
+                            <button
+                                    id="module-fullbright"
+                                    class="hz-toggle"
+                                    data-module="fullbright"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>Fullbright</h3>
+
+                            <p>
+                                Improves visibility in dark environments.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="fullbright"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- HUD -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="client"
+                            data-name="hud interface client"
+                            data-module="hud"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                H
+                            </div>
+
+                            <button
+                                    id="module-hud"
+                                    class="hz-toggle"
+                                    data-module="hud"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>HUD</h3>
+
+                            <p>
+                                Controls the Herz in-game interface.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="hud"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- ClickGUI -->
+
+                    <article
+                            class="hz-module-card"
+                            data-category="client"
+                            data-name="clickgui interface client"
+                            data-module="clickgui"
+                    >
+
+                        <div class="hz-module-card-glow"></div>
+
+                        <div class="hz-module-header">
+
+                            <div class="hz-module-icon">
+                                C
+                            </div>
+
+                            <button
+                                    id="module-clickgui"
+                                    class="hz-toggle enabled"
+                                    data-module="clickgui"
+                            >
+                                <span></span>
+                            </button>
+
+                        </div>
+
+                        <div class="hz-module-copy">
+                            <h3>ClickGUI</h3>
+
+                            <p>
+                                Configure the Herz graphical interface.
+                            </p>
+                        </div>
+
+                        <div class="hz-module-footer">
+
+                            <button
+                                    class="hz-bind-button"
+                                    data-bind-target="clickgui"
+                            >
+                                <span>KEY</span>
+                                <strong>NONE</strong>
+                            </button>
+
+                            <button class="hz-settings-button">
+                                •••
+                            </button>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </main>
+
+        </div>
+
+
+        <!-- STATUS BAR -->
+        <footer class="hz-statusbar">
+
+            <div>
+                <span class="hz-statusbar-dot"></span>
+                Herz is ready
+            </div>
+
+            <div class="hz-statusbar-actions">
+                <span>Press</span>
+
+                <button
+                        class="hz-footer-key"
+                        id="hz-footer-open-bind"
+                >
+                    RSHIFT
+                </button>
+
+                <span>to toggle</span>
+            </div>
+
+        </footer>
+
+    </section>
+
+
+    <!-- KEY CAPTURE -->
+    <div id="hz-key-capture" class="hz-key-capture">
+
+        <div class="hz-key-capture-card">
+
+            <div class="hz-key-capture-orb">
+                ⌨
+            </div>
+
+            <div class="hz-key-capture-eyebrow">
+                KEYBIND
+            </div>
+
+            <h2 id="hz-key-capture-title">
+                Choose a key
+            </h2>
+
+            <p>
+                Press any key to assign it.
+                Press Escape to cancel.
+                Press Backspace to clear.
+            </p>
+
+            <div class="hz-key-wave">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

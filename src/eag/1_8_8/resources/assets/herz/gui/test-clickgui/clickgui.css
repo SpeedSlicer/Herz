@@ -1,0 +1,1730 @@
+#herz-clickgui-root {
+    --hz-accent: 132, 98, 255;
+    --hz-accent-2: 63, 186, 255;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 999999;
+
+    font-family:
+            Inter,
+            ui-sans-serif,
+            system-ui,
+            -apple-system,
+            BlinkMacSystemFont,
+            "Segoe UI",
+            sans-serif;
+
+    color: #f4f2ff;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+            opacity 220ms ease,
+            visibility 220ms ease;
+}
+
+#herz-clickgui-root.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+#herz-clickgui-root * {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BACKDROP
+   ========================================================= */
+
+#herz-clickgui-root .hz-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(4, 5, 11, .80),
+                    rgba(7, 7, 15, .68)
+            );
+
+    backdrop-filter:
+            blur(18px)
+            saturate(135%);
+
+    -webkit-backdrop-filter:
+            blur(18px)
+            saturate(135%);
+
+    transition:
+            backdrop-filter 300ms ease,
+            background 300ms ease;
+}
+
+#herz-clickgui-root .hz-ambient {
+    position: absolute;
+
+    border-radius: 999px;
+
+    filter: blur(90px);
+
+    opacity: .18;
+
+    pointer-events: none;
+
+    animation: hzFloat 12s ease-in-out infinite alternate;
+}
+
+#herz-clickgui-root .hz-ambient-a {
+    width: 480px;
+    height: 480px;
+
+    left: -120px;
+    top: -160px;
+
+    background:
+            rgb(var(--hz-accent));
+}
+
+#herz-clickgui-root .hz-ambient-b {
+    width: 380px;
+    height: 380px;
+
+    right: -80px;
+    bottom: -100px;
+
+    background:
+            rgb(var(--hz-accent-2));
+
+    animation-delay: -4s;
+}
+
+#herz-clickgui-root .hz-ambient-c {
+    width: 250px;
+    height: 250px;
+
+    left: 55%;
+    top: 5%;
+
+    background: #d969ff;
+
+    opacity: .08;
+
+    animation-delay: -8s;
+}
+
+@keyframes hzFloat {
+    from {
+        transform:
+                translate3d(-20px, -10px, 0)
+                scale(.96);
+    }
+
+    to {
+        transform:
+                translate3d(40px, 25px, 0)
+                scale(1.06);
+    }
+}
+
+
+/* =========================================================
+   WINDOW
+   ========================================================= */
+
+#herz-clickgui-root .hz-window {
+    --hz-x: 0px;
+    --hz-y: 0px;
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(1080px, calc(100vw - 70px));
+    height: min(680px, calc(100vh - 70px));
+
+    display: grid;
+
+    grid-template-rows:
+        62px
+        minmax(0, 1fr)
+        35px;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    border:
+            1px solid rgba(255, 255, 255, .10);
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(22, 20, 34, .82),
+                    rgba(12, 13, 22, .78)
+            );
+
+    backdrop-filter:
+            blur(30px)
+            saturate(145%);
+
+    -webkit-backdrop-filter:
+            blur(30px)
+            saturate(145%);
+
+    box-shadow:
+            0 45px 140px rgba(0, 0, 0, .72),
+            0 12px 40px rgba(0, 0, 0, .45),
+            inset 0 1px 0 rgba(255, 255, 255, .075);
+
+    transform:
+            translate(
+                    calc(-50% + var(--hz-x)),
+                    calc(-50% + var(--hz-y))
+            )
+            scale(.94)
+            translateY(10px);
+
+    opacity: 0;
+
+    transition:
+            transform 380ms cubic-bezier(.16, 1, .3, 1),
+            opacity 250ms ease,
+            box-shadow 300ms ease;
+}
+
+#herz-clickgui-root.open .hz-window {
+    transform:
+            translate(
+                    calc(-50% + var(--hz-x)),
+                    calc(-50% + var(--hz-y))
+            )
+            scale(1)
+            translateY(0);
+
+    opacity: 1;
+}
+
+
+/* glass highlight */
+
+#herz-clickgui-root .hz-window::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border-radius: inherit;
+
+    background:
+            linear-gradient(
+                    120deg,
+                    rgba(255,255,255,.055),
+                    transparent 18%,
+                    transparent 72%,
+                    rgba(132,98,255,.035)
+            );
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+#herz-clickgui-root .hz-topbar {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        minmax(280px, 420px)
+        1fr;
+
+    align-items: center;
+
+    padding: 0 16px 0 18px;
+
+    border-bottom:
+            1px solid rgba(255, 255, 255, .065);
+
+    background:
+            rgba(18, 18, 29, .48);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    user-select: none;
+}
+
+#herz-clickgui-root .hz-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+}
+
+#herz-clickgui-root .hz-brand-logo {
+    position: relative;
+
+    width: 36px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 11px;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgb(var(--hz-accent)),
+                    rgb(var(--hz-accent-2))
+            );
+
+    box-shadow:
+            0 8px 24px rgba(var(--hz-accent), .32),
+            inset 0 1px 0 rgba(255,255,255,.3);
+
+    overflow: hidden;
+}
+
+#herz-clickgui-root .hz-brand-logo::before {
+    content: "";
+
+    position: absolute;
+
+    width: 28px;
+    height: 70px;
+
+    background:
+            rgba(255,255,255,.32);
+
+    transform:
+            rotate(35deg)
+            translateX(-45px);
+
+    animation:
+            hzLogoShine 5s ease-in-out infinite;
+}
+
+@keyframes hzLogoShine {
+    0%, 65% {
+        transform:
+                rotate(35deg)
+                translateX(-50px);
+    }
+
+    82%, 100% {
+        transform:
+                rotate(35deg)
+                translateX(55px);
+    }
+}
+
+#herz-clickgui-root .hz-brand-logo span {
+    position: relative;
+
+    font-weight: 900;
+
+    font-size: 16px;
+}
+
+#herz-clickgui-root .hz-brand-copy {
+    display: flex;
+    flex-direction: column;
+}
+
+#herz-clickgui-root .hz-brand-name {
+    font-size: 12px;
+
+    font-weight: 850;
+
+    letter-spacing: .19em;
+}
+
+#herz-clickgui-root .hz-brand-version {
+    margin-top: 3px;
+
+    color: rgba(216, 211, 235, .40);
+
+    font-size: 7px;
+
+    letter-spacing: .24em;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+#herz-clickgui-root .hz-topbar-center {
+    display: flex;
+    justify-content: center;
+}
+
+#herz-clickgui-root .hz-search {
+    width: 100%;
+    height: 36px;
+
+    display: grid;
+
+    grid-template-columns:
+        20px
+        minmax(0, 1fr)
+        24px;
+
+    align-items: center;
+
+    padding: 0 9px;
+
+    border-radius: 11px;
+
+    border:
+            1px solid rgba(255,255,255,.065);
+
+    background:
+            rgba(255,255,255,.035);
+
+    box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.02);
+
+    transition:
+            border-color 180ms ease,
+            background 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+}
+
+#herz-clickgui-root .hz-search:focus-within {
+    border-color:
+            rgba(var(--hz-accent), .45);
+
+    background:
+            rgba(var(--hz-accent), .055);
+
+    box-shadow:
+            0 0 0 3px rgba(var(--hz-accent), .08),
+            0 10px 30px rgba(0,0,0,.16);
+}
+
+#herz-clickgui-root .hz-search-icon {
+    color:
+            rgba(235,232,255,.36);
+}
+
+#herz-clickgui-root .hz-search input {
+    min-width: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #f4f2ff;
+
+    font: inherit;
+
+    font-size: 11px;
+}
+
+#herz-clickgui-root .hz-search input::placeholder {
+    color:
+            rgba(235,232,255,.33);
+}
+
+#herz-clickgui-root .hz-search-shortcut {
+    width: 21px;
+    height: 21px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 6px;
+
+    color:
+            rgba(235,232,255,.36);
+
+    background:
+            rgba(255,255,255,.045);
+
+    border:
+            1px solid rgba(255,255,255,.05);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   TOP ACTIONS
+   ========================================================= */
+
+#herz-clickgui-root .hz-topbar-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    gap: 9px;
+}
+
+#herz-clickgui-root .hz-connection {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    color:
+            rgba(220,217,234,.43);
+
+    font-size: 9px;
+
+    margin-right: 4px;
+}
+
+#herz-clickgui-root .hz-connection > span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background:
+            #5ce6ab;
+
+    box-shadow:
+            0 0 10px rgba(92,230,171,.65);
+}
+
+#herz-clickgui-root button {
+    font-family: inherit;
+}
+
+#herz-clickgui-root .hz-key-button,
+#herz-clickgui-root .hz-footer-key {
+    height: 29px;
+
+    padding: 0 9px;
+
+    border-radius: 8px;
+
+    border:
+            1px solid rgba(255,255,255,.07);
+
+    background:
+            rgba(255,255,255,.04);
+
+    color:
+            rgba(235,232,255,.60);
+
+    font-size: 8px;
+
+    font-weight: 750;
+
+    letter-spacing: .06em;
+
+    cursor: pointer;
+
+    transition:
+            transform 150ms cubic-bezier(.2,.8,.2,1),
+            border-color 150ms ease,
+            background 150ms ease,
+            color 150ms ease,
+            box-shadow 150ms ease;
+}
+
+#herz-clickgui-root .hz-key-button:hover,
+#herz-clickgui-root .hz-footer-key:hover {
+    color: #fff;
+
+    border-color:
+            rgba(var(--hz-accent), .28);
+
+    background:
+            rgba(var(--hz-accent), .10);
+
+    box-shadow:
+            0 6px 18px rgba(0,0,0,.18);
+
+    transform: translateY(-1px);
+}
+
+#herz-clickgui-root .hz-icon-button {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-items: center;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background:
+            rgba(255,255,255,.035);
+
+    color:
+            rgba(239,237,250,.48);
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition:
+            transform 150ms ease,
+            color 150ms ease,
+            background 150ms ease;
+}
+
+#herz-clickgui-root .hz-icon-button:hover {
+    transform:
+            scale(1.05);
+
+    color: #fff;
+
+    background:
+            rgba(255,255,255,.075);
+}
+
+#herz-clickgui-root .hz-close:hover {
+    background:
+            rgba(255,77,111,.15);
+
+    color:
+            #ff8098;
+}
+
+
+/* =========================================================
+   MAIN LAYOUT
+   ========================================================= */
+
+#herz-clickgui-root .hz-layout {
+    min-height: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        190px
+        minmax(0, 1fr);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+#herz-clickgui-root .hz-sidebar {
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding:
+            23px 12px
+            15px;
+
+    border-right:
+            1px solid rgba(255,255,255,.055);
+
+    background:
+            rgba(7,8,14,.25);
+
+    backdrop-filter:
+            blur(22px);
+
+    -webkit-backdrop-filter:
+            blur(22px);
+}
+
+#herz-clickgui-root .hz-sidebar-label {
+    margin:
+            0 10px
+            10px;
+
+    color:
+            rgba(221,217,240,.27);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+}
+
+#herz-clickgui-root .hz-categories {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+#herz-clickgui-root .hz-category {
+    position: relative;
+
+    width: 100%;
+    height: 42px;
+
+    display: grid;
+
+    grid-template-columns:
+        22px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    padding: 0 10px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: transparent;
+
+    color:
+            rgba(226,222,242,.48);
+
+    font-size: 11px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+            background 180ms ease,
+            color 180ms ease,
+            transform 180ms cubic-bezier(.2,.8,.2,1);
+}
+
+#herz-clickgui-root .hz-category::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 7px;
+    bottom: 7px;
+
+    width: 2px;
+
+    border-radius: 4px;
+
+    background:
+            linear-gradient(
+                    rgb(var(--hz-accent)),
+                    rgb(var(--hz-accent-2))
+            );
+
+    transform:
+            scaleY(0);
+
+    opacity: 0;
+
+    transition:
+            transform 180ms cubic-bezier(.2,.8,.2,1),
+            opacity 180ms ease;
+}
+
+#herz-clickgui-root .hz-category:hover {
+    color:
+            rgba(246,243,255,.82);
+
+    background:
+            rgba(255,255,255,.035);
+
+    transform:
+            translateX(2px);
+}
+
+#herz-clickgui-root .hz-category.active {
+    color: #fff;
+
+    background:
+            linear-gradient(
+                    90deg,
+                    rgba(var(--hz-accent), .15),
+                    rgba(var(--hz-accent), .035)
+            );
+}
+
+#herz-clickgui-root .hz-category.active::before {
+    transform:
+            scaleY(1);
+
+    opacity: 1;
+}
+
+#herz-clickgui-root .hz-category-icon {
+    color:
+            rgba(226,222,242,.38);
+
+    transition:
+            color 180ms ease,
+            transform 180ms ease;
+}
+
+#herz-clickgui-root .hz-category.active .hz-category-icon {
+    color:
+            rgb(var(--hz-accent));
+
+    transform:
+            scale(1.12);
+}
+
+#herz-clickgui-root .hz-category-count {
+    min-width: 20px;
+    height: 18px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 6px;
+
+    background:
+            rgba(255,255,255,.035);
+
+    color:
+            rgba(226,222,242,.30);
+
+    font-size: 8px;
+}
+
+#herz-clickgui-root .hz-sidebar-spacer {
+    flex: 1;
+}
+
+#herz-clickgui-root .hz-sidebar-card {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 10px;
+
+    border-radius: 12px;
+
+    border:
+            1px solid rgba(255,255,255,.05);
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(var(--hz-accent), .075),
+                    rgba(255,255,255,.018)
+            );
+
+    transition:
+            transform 180ms ease,
+            border-color 180ms ease,
+            background 180ms ease;
+}
+
+#herz-clickgui-root .hz-sidebar-card:hover {
+    transform:
+            translateY(-2px);
+
+    border-color:
+            rgba(var(--hz-accent), .18);
+}
+
+#herz-clickgui-root .hz-sidebar-card-icon {
+    width: 29px;
+    height: 29px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 9px;
+
+    background:
+            rgba(var(--hz-accent), .12);
+
+    color:
+            rgb(var(--hz-accent));
+
+    font-size: 11px;
+}
+
+#herz-clickgui-root .hz-sidebar-card-title {
+    color:
+            rgba(245,242,255,.80);
+
+    font-size: 10px;
+
+    font-weight: 650;
+}
+
+#herz-clickgui-root .hz-sidebar-card-subtitle {
+    margin-top: 2px;
+
+    color:
+            rgba(225,221,240,.31);
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+#herz-clickgui-root .hz-content {
+    min-height: 0;
+
+    padding:
+            30px 31px
+            28px;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color:
+            rgba(var(--hz-accent), .25)
+            transparent;
+}
+
+#herz-clickgui-root .hz-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+#herz-clickgui-root .hz-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#herz-clickgui-root .hz-content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+
+    background:
+            rgba(var(--hz-accent), .20);
+}
+
+#herz-clickgui-root .hz-content-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 25px;
+}
+
+#herz-clickgui-root .hz-eyebrow {
+    margin-bottom: 7px;
+
+    color:
+            rgba(var(--hz-accent), .72);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .17em;
+}
+
+#herz-clickgui-root .hz-content-heading h1 {
+    margin: 0;
+
+    font-size: 26px;
+
+    font-weight: 620;
+
+    letter-spacing: -.035em;
+
+    transition:
+            opacity 130ms ease,
+            transform 130ms ease;
+}
+
+#herz-clickgui-root .hz-content-heading h1.transitioning {
+    opacity: 0;
+
+    transform:
+            translateY(4px);
+}
+
+#herz-clickgui-root .hz-content-heading p {
+    margin:
+            5px 0 0;
+
+    color:
+            rgba(223,219,239,.38);
+
+    font-size: 10px;
+}
+
+#herz-clickgui-root .hz-heading-pill {
+    padding:
+            6px 9px;
+
+    border-radius: 8px;
+
+    border:
+            1px solid rgba(255,255,255,.055);
+
+    background:
+            rgba(255,255,255,.03);
+
+    color:
+            rgba(225,221,240,.38);
+
+    font-size: 8px;
+}
+
+#herz-clickgui-root .hz-heading-pill span {
+    color:
+            rgba(245,242,255,.70);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   MODULE GRID
+   ========================================================= */
+
+#herz-clickgui-root .hz-module-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   MODULE CARD
+   ========================================================= */
+
+#herz-clickgui-root .hz-module-card {
+    position: relative;
+
+    min-height: 174px;
+
+    display: none;
+
+    padding: 16px;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    border:
+            1px solid rgba(255,255,255,.055);
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.045),
+                    rgba(255,255,255,.017)
+            );
+
+    backdrop-filter:
+            blur(16px);
+
+    -webkit-backdrop-filter:
+            blur(16px);
+
+    box-shadow:
+            inset 0 1px 0 rgba(255,255,255,.025);
+
+    transform:
+            translateY(10px)
+            scale(.98);
+
+    opacity: 0;
+
+    transition:
+            transform 210ms cubic-bezier(.2,.8,.2,1),
+            border-color 210ms ease,
+            background 210ms ease,
+            box-shadow 210ms ease;
+}
+
+#herz-clickgui-root .hz-module-card.visible {
+    display: block;
+
+    animation:
+            hzCardEnter 280ms
+            cubic-bezier(.16,1,.3,1)
+            forwards;
+}
+
+@keyframes hzCardEnter {
+    from {
+        opacity: 0;
+
+        transform:
+                translateY(11px)
+                scale(.975);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+                translateY(0)
+                scale(1);
+    }
+}
+
+#herz-clickgui-root .hz-module-card:hover {
+    transform:
+            translateY(-4px)
+            scale(1.012);
+
+    border-color:
+            rgba(var(--hz-accent), .20);
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(var(--hz-accent), .075),
+                    rgba(255,255,255,.023)
+            );
+
+    box-shadow:
+            0 14px 35px rgba(0,0,0,.22),
+            inset 0 1px 0 rgba(255,255,255,.045);
+}
+
+#herz-clickgui-root .hz-module-card.enabled {
+    border-color:
+            rgba(var(--hz-accent), .28);
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(var(--hz-accent), .105),
+                    rgba(var(--hz-accent), .025)
+            );
+}
+
+#herz-clickgui-root .hz-module-card-glow {
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    right: -95px;
+    top: -95px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(var(--hz-accent), .20);
+
+    filter:
+            blur(45px);
+
+    opacity: 0;
+
+    transition:
+            opacity 250ms ease,
+            transform 400ms ease;
+}
+
+#herz-clickgui-root .hz-module-card:hover .hz-module-card-glow,
+#herz-clickgui-root .hz-module-card.enabled .hz-module-card-glow {
+    opacity: .55;
+
+    transform:
+            scale(1.15);
+}
+
+#herz-clickgui-root .hz-module-header {
+    position: relative;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#herz-clickgui-root .hz-module-icon {
+    width: 33px;
+    height: 33px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 10px;
+
+    background:
+            rgba(var(--hz-accent), .09);
+
+    border:
+            1px solid rgba(var(--hz-accent), .08);
+
+    color:
+            rgba(172,148,255,.90);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    transition:
+            transform 200ms cubic-bezier(.2,.8,.2,1),
+            background 200ms ease,
+            box-shadow 200ms ease;
+}
+
+#herz-clickgui-root .hz-module-card:hover .hz-module-icon {
+    transform:
+            rotate(-4deg)
+            scale(1.08);
+
+    background:
+            rgba(var(--hz-accent), .14);
+
+    box-shadow:
+            0 7px 20px rgba(var(--hz-accent), .10);
+}
+
+
+/* module text */
+
+#herz-clickgui-root .hz-module-copy {
+    position: relative;
+
+    margin-top: 14px;
+}
+
+#herz-clickgui-root .hz-module-copy h3 {
+    margin: 0;
+
+    color:
+            rgba(247,244,255,.91);
+
+    font-size: 12px;
+
+    font-weight: 650;
+}
+
+#herz-clickgui-root .hz-module-copy p {
+    min-height: 32px;
+
+    margin:
+            6px 0 0;
+
+    color:
+            rgba(222,217,238,.37);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   TOGGLE
+   ========================================================= */
+
+#herz-clickgui-root .hz-toggle {
+    position: relative;
+
+    width: 37px;
+    height: 21px;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background:
+            rgba(255,255,255,.09);
+
+    box-shadow:
+            inset 0 1px 3px rgba(0,0,0,.24);
+
+    cursor: pointer;
+
+    transition:
+            background 230ms ease,
+            box-shadow 230ms ease,
+            transform 150ms ease;
+}
+
+#herz-clickgui-root .hz-toggle:hover {
+    transform:
+            scale(1.06);
+}
+
+#herz-clickgui-root .hz-toggle span {
+    position: absolute;
+
+    left: 3px;
+    top: 3px;
+
+    width: 15px;
+    height: 15px;
+
+    border-radius: 50%;
+
+    background:
+            rgba(240,238,248,.55);
+
+    box-shadow:
+            0 2px 5px rgba(0,0,0,.25);
+
+    transition:
+            left 260ms cubic-bezier(.34,1.56,.64,1),
+            background 180ms ease,
+            box-shadow 180ms ease,
+            transform 180ms ease;
+}
+
+#herz-clickgui-root .hz-toggle.enabled {
+    background:
+            linear-gradient(
+                    90deg,
+                    rgb(var(--hz-accent)),
+                    rgb(var(--hz-accent-2))
+            );
+
+    box-shadow:
+            0 0 18px rgba(var(--hz-accent), .28),
+            inset 0 1px 0 rgba(255,255,255,.26);
+}
+
+#herz-clickgui-root .hz-toggle.enabled span {
+    left: 19px;
+
+    background: #fff;
+
+    box-shadow:
+            0 3px 8px rgba(0,0,0,.28);
+
+    transform:
+            scale(1.03);
+}
+
+
+/* =========================================================
+   MODULE FOOTER
+   ========================================================= */
+
+#herz-clickgui-root .hz-module-footer {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 12px;
+}
+
+#herz-clickgui-root .hz-bind-button {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 6px;
+
+    height: 25px;
+
+    padding: 0 7px;
+
+    border-radius: 7px;
+
+    border:
+            1px solid rgba(255,255,255,.045);
+
+    background:
+            rgba(255,255,255,.025);
+
+    color:
+            rgba(224,220,238,.30);
+
+    cursor: pointer;
+
+    transition:
+            transform 150ms ease,
+            background 150ms ease,
+            border-color 150ms ease,
+            color 150ms ease;
+}
+
+#herz-clickgui-root .hz-bind-button:hover {
+    transform:
+            translateY(-1px);
+
+    background:
+            rgba(var(--hz-accent), .08);
+
+    border-color:
+            rgba(var(--hz-accent), .17);
+}
+
+#herz-clickgui-root .hz-bind-button span {
+    font-size: 7px;
+
+    letter-spacing: .09em;
+}
+
+#herz-clickgui-root .hz-bind-button strong {
+    color:
+            rgba(237,233,250,.58);
+
+    font-size: 7px;
+
+    font-weight: 700;
+}
+
+#herz-clickgui-root .hz-settings-button {
+    width: 25px;
+    height: 25px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: transparent;
+
+    color:
+            rgba(225,221,240,.28);
+
+    cursor: pointer;
+
+    transition:
+            background 150ms ease,
+            color 150ms ease,
+            transform 150ms ease;
+}
+
+#herz-clickgui-root .hz-settings-button:hover {
+    background:
+            rgba(255,255,255,.045);
+
+    color:
+            rgba(245,242,255,.72);
+
+    transform:
+            rotate(3deg);
+}
+
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+
+#herz-clickgui-root .hz-statusbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 15px;
+
+    border-top:
+            1px solid rgba(255,255,255,.045);
+
+    background:
+            rgba(8,8,14,.25);
+
+    color:
+            rgba(225,221,240,.28);
+
+    font-size: 8px;
+}
+
+#herz-clickgui-root .hz-statusbar > div {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+#herz-clickgui-root .hz-statusbar-dot {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background:
+            rgb(var(--hz-accent));
+
+    box-shadow:
+            0 0 8px rgba(var(--hz-accent), .55);
+}
+
+#herz-clickgui-root .hz-statusbar-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+}
+
+#herz-clickgui-root .hz-footer-key {
+    height: 20px;
+
+    padding: 0 6px;
+
+    font-size: 7px;
+}
+
+
+/* =========================================================
+   KEY CAPTURE MODAL
+   ========================================================= */
+
+#herz-clickgui-root .hz-key-capture {
+    position: absolute;
+    inset: 0;
+
+    z-index: 50;
+
+    display: grid;
+    place-items: center;
+
+    background:
+            rgba(4,4,9,.28);
+
+    backdrop-filter:
+            blur(0px);
+
+    -webkit-backdrop-filter:
+            blur(0px);
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition:
+            opacity 220ms ease,
+            visibility 220ms ease,
+            backdrop-filter 300ms ease;
+}
+
+#herz-clickgui-root .hz-key-capture.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+
+    backdrop-filter:
+            blur(17px);
+
+    -webkit-backdrop-filter:
+            blur(17px);
+}
+
+#herz-clickgui-root .hz-key-capture-card {
+    width: 310px;
+
+    padding: 27px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border:
+            1px solid rgba(255,255,255,.10);
+
+    background:
+            linear-gradient(
+                    145deg,
+                    rgba(25,23,38,.82),
+                    rgba(12,13,22,.74)
+            );
+
+    backdrop-filter:
+            blur(28px)
+            saturate(140%);
+
+    -webkit-backdrop-filter:
+            blur(28px)
+            saturate(140%);
+
+    box-shadow:
+            0 30px 90px rgba(0,0,0,.55),
+            inset 0 1px 0 rgba(255,255,255,.07);
+
+    transform:
+            scale(.90)
+            translateY(12px);
+
+    opacity: 0;
+
+    transition:
+            transform 350ms cubic-bezier(.16,1,.3,1),
+            opacity 200ms ease;
+}
+
+#herz-clickgui-root .hz-key-capture.active
+.hz-key-capture-card {
+    transform:
+            scale(1)
+            translateY(0);
+
+    opacity: 1;
+}
+
+#herz-clickgui-root .hz-key-capture-orb {
+    width: 46px;
+    height: 46px;
+
+    margin: 0 auto 14px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    rgba(var(--hz-accent), .23),
+                    rgba(var(--hz-accent-2), .13)
+            );
+
+    color:
+            #c2b4ff;
+
+    font-size: 20px;
+
+    box-shadow:
+            0 10px 30px rgba(var(--hz-accent), .12);
+}
+
+#herz-clickgui-root .hz-key-capture-eyebrow {
+    color:
+            rgba(var(--hz-accent), .75);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+}
+
+#herz-clickgui-root .hz-key-capture h2 {
+    margin:
+            7px 0 8px;
+
+    font-size: 19px;
+
+    font-weight: 620;
+}
+
+#herz-clickgui-root .hz-key-capture p {
+    margin: 0;
+
+    color:
+            rgba(228,224,243,.39);
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+#herz-clickgui-root .hz-key-wave {
+    height: 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 3px;
+
+    margin-top: 18px;
+}
+
+#herz-clickgui-root .hz-key-wave span {
+    width: 3px;
+
+    border-radius: 4px;
+
+    background:
+            rgba(var(--hz-accent), .68);
+
+    animation:
+            hzKeyWave .8s ease-in-out infinite alternate;
+}
+
+#herz-clickgui-root .hz-key-wave span:nth-child(1) {
+    height: 7px;
+}
+
+#herz-clickgui-root .hz-key-wave span:nth-child(2) {
+    height: 14px;
+    animation-delay: -150ms;
+}
+
+#herz-clickgui-root .hz-key-wave span:nth-child(3) {
+    height: 20px;
+    animation-delay: -300ms;
+}
+
+#herz-clickgui-root .hz-key-wave span:nth-child(4) {
+    height: 14px;
+    animation-delay: -450ms;
+}
+
+#herz-clickgui-root .hz-key-wave span:nth-child(5) {
+    height: 7px;
+    animation-delay: -600ms;
+}
+
+@keyframes hzKeyWave {
+    to {
+        transform: scaleY(.35);
+
+        opacity: .35;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    #herz-clickgui-root .hz-module-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    #herz-clickgui-root .hz-topbar {
+        grid-template-columns:
+            auto
+            1fr
+            auto;
+    }
+
+}
+
+@media (max-width: 680px) {
+
+    #herz-clickgui-root .hz-window {
+        width:
+                calc(100vw - 24px);
+
+        height:
+                calc(100vh - 24px);
+    }
+
+    #herz-clickgui-root .hz-layout {
+        grid-template-columns:
+            150px
+            minmax(0, 1fr);
+    }
+
+    #herz-clickgui-root .hz-module-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    #herz-clickgui-root .hz-connection {
+        display: none;
+    }
+
+}

@@ -12,7 +12,7 @@ public class JSWebGUI implements IWebGUI {
     IWebGUIPlatform platform;
 
     public JSWebGUI(String gui) {
-        this.id = gui + "_" + UUID.randomUUID().toString();
+        this.id = gui;
 
         htmlComponent = new Sordidabilis<>("");
         cssComponent = new Sordidabilis<>("");

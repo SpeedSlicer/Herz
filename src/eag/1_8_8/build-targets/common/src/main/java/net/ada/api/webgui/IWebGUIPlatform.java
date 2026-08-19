@@ -22,7 +22,9 @@ public interface IWebGUIPlatform {
             IWebGUIGenericListener listener
     );
 
-    String getValueFromElement(String elementID);
+    String getValueFromInputElement(String elementID);
 
     String getInnerHTMLFromElement(String elementID);
+
+    void setInnerHTMLElement(String elementID, String content);
 }

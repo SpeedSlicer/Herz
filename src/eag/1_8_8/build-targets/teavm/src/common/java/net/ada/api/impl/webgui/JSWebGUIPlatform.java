@@ -54,7 +54,7 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     @JSBody(
             params = { "gui_id" },
             script =
-                    "var gui = document.getElementById('gui_id');" +
+                    "var gui = document.getElementById(gui_id);" +
                             "gui.remove();"
 
     )
@@ -146,7 +146,7 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     }
 
     @Override
-    public String getValueFromElement(String elementID) {
+    public String getValueFromInputElement(String elementID) {
         HTMLDocument document = HTMLDocument.current();
 
         HTMLInputElement myTextBox = (HTMLInputElement) document.getElementById(elementID);
@@ -158,8 +158,16 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     public String getInnerHTMLFromElement(String elementID) {
         HTMLDocument document = HTMLDocument.current();
 
-        HTMLInputElement myTextBox = (HTMLInputElement) document.getElementById(elementID);
+        HTMLElement myTextBox = document.getElementById(elementID);
 
         return myTextBox.getInnerHTML();
+    }
+
+    @Override
+    public void setInnerHTMLElement(String elementID, String content) {
+        HTMLDocument document = HTMLDocument.current();
+
+        HTMLElement elm = document.getElementById(elementID);
+        elm.setInnerHTML(content);
     }
 }

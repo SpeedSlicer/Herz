@@ -16,17 +16,98 @@ public class MinecraftMixin {
 
         Client client = new Client();
 
-        var test = client.getClientAPI().getWebGUIPlatform().generateGUIObject("test");
+        var webGUI =
+                client
+                        .getClientAPI()
+                        .getWebGUIPlatform();
 
-        test.setCSSComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.css"));
-        test.setJSComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.js"));
-        test.setHTMLComponent(EagRuntime.getRequiredResourceString("/assets/herz/gui/test/test.html"));
+        var clickGUI =
+                webGUI.generateGUIObject(
+                        "herz-clickgui"
+                );
+
+        clickGUI.setCSSComponent(
+                EagRuntime.getRequiredResourceString(
+                        "/assets/herz/gui/clickgui/clickgui.css"
+                )
+        );
+
+        clickGUI.setJSComponent(
+                EagRuntime.getRequiredResourceString(
+                        "/assets/herz/gui/clickgui/clickgui.js"
+                )
+        );
+
+        clickGUI.setHTMLComponent(
+                EagRuntime.getRequiredResourceString(
+                        "/assets/herz/gui/clickgui/clickgui.html"
+                )
+        );
+
+        webGUI.addGUI(clickGUI);
 
 
-        client.getClientAPI().getWebGUIPlatform().addGUI(test);
-        test.flush();
-        client.getClientAPI().getWebGUIPlatform().addClickListener("myButton", () -> {
-            System.out.println("Button Listener Works!");
-        });
+        webGUI.addClickListener(
+                "module-killaura",
+                () -> {
+                    System.out.println("KillAura toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-velocity",
+                () -> {
+                    System.out.println("Velocity toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-flight",
+                () -> {
+                    System.out.println("Flight toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-sprint",
+                () -> {
+                    System.out.println("Sprint toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-noslow",
+                () -> {
+                    System.out.println("NoSlow toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-inventory",
+                () -> {
+                    System.out.println("Inventory toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-esp",
+                () -> {
+                    System.out.println("ESP toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-fullbright",
+                () -> {
+                    System.out.println("Fullbright toggled");
+                }
+        );
+
+        webGUI.addClickListener(
+                "module-hud",
+                () -> {
+                    System.out.println("HUD toggled");
+                }
+        );
     }
 }
