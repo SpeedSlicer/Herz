@@ -1,1 +1,0 @@
-java -jar ../../../build-tools/mixins-1.0-SNAPSHOT-all.jar src/eag/1_8_8/build/classes/java/main  src/eag/1_8_8/build-targets/common/build/classes/java/main src/eag/1_8_8/build-targets/common/build/resources/main/mixin-targets.json src/eag/1_8_8/build/classes/java/main

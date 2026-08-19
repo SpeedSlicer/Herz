@@ -1,11 +1,13 @@
 package net.ada.api.eventbus.handler;
 
+import jdk.jfr.Experimental;
 import net.ada.api.eventbus.events.IEvent;
 import net.ada.api.eventbus.events.IEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Experimental
 public class EventBus {
 
     private final Map<Class<? extends IEvent>, EventHandler<? extends IEvent>> events;

@@ -6,7 +6,8 @@
   "package": "net.ada.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MinecraftMixin"
+    "MinecraftMixin",
+    "GuiScreenMixin"
   ],
   "injectors": {
     "default": 1

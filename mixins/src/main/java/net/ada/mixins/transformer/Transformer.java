@@ -6,19 +6,22 @@ import net.ada.manifest.MixinSourceObj;
 import net.lenni0451.classtransform.TransformerManager;
 import net.lenni0451.classtransform.additionalclassprovider.PathClassProvider;
 import net.lenni0451.classtransform.mixinstranslator.MixinsTranslator;
+import net.lenni0451.classtransform.utils.tree.BasicClassProvider;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Stream;
-import net.lenni0451.classtransform.utils.tree.BasicClassProvider;
+
 public class Transformer {
+
     public static void main(String[] args) throws IOException, URISyntaxException {
         System.out.println("Beginning Transformer");
+
         Path jarPath = Path.of(
                 Transformer.class
                         .getProtectionDomain()
@@ -30,101 +33,133 @@ public class Transformer {
         Path rootPath = jarPath.getParent().getParent();
 
         Gson gson = new GsonBuilder().create();
-        //  TODO please replace this, i just suck at gradle atm~
-        Path srcPath = rootPath.resolve(args[0]).normalize();
-        Path addonPath = rootPath.resolve(args[1]).normalize();
-        Path mixinRefPath = rootPath.resolve(args[2]).normalize();
-        Path targetPath = rootPath.resolve(args[3]).normalize();
-        System.out.println("srcPath: " + srcPath);
-        System.out.println("addonPath: " + addonPath);
+
+        Path classesPath = rootPath.resolve(args[0]).normalize();
+        Path mixinRefPath = rootPath.resolve(args[1]).normalize();
+
+        System.out.println("classesPath: " + classesPath);
         System.out.println("mixinRefPath: " + mixinRefPath);
-        System.out.println("targetPath: " + targetPath);
+
         BasicClassProvider javaProvider = new BasicClassProvider();
-        PathClassProvider srcProvider = new PathClassProvider(srcPath, javaProvider);
-        PathClassProvider provider = new PathClassProvider(addonPath, srcProvider);
-        TransformerManager transformerManager = new TransformerManager(provider);
-        MixinSourceObj mixinSourceObj = gson.fromJson(new String(Files.readAllBytes(mixinRefPath)), MixinSourceObj.class);
-        transformerManager.addTransformerPreprocessor(new MixinsTranslator());
-        for(String mixin : mixinSourceObj.mixins()) {
-             transformerManager.addTransformer(mixinSourceObj.mixinPackage() + "." + mixin);
+        PathClassProvider classProvider =
+                new PathClassProvider(classesPath, javaProvider);
+
+        TransformerManager transformerManager =
+                new TransformerManager(classProvider);
+
+        MixinSourceObj mixinSourceObj = gson.fromJson(
+                Files.readString(mixinRefPath),
+                MixinSourceObj.class
+        );
+
+        transformerManager.addTransformerPreprocessor(
+                new MixinsTranslator()
+        );
+
+        for (String mixin : mixinSourceObj.mixins()) {
+            String mixinClass =
+                    mixinSourceObj.mixinPackage() + "." + mixin;
+
+            System.out.println("Mixin Loaded: " + mixinClass);
+            transformerManager.addTransformer(mixinClass);
         }
-        transformClasses(srcPath, targetPath, transformerManager);
-        combineSrc(addonPath, targetPath, mixinSourceObj.mixinPackage());
+
+        transform(
+                classesPath,
+                transformerManager,
+                mixinSourceObj.mixinPackage()
+        );
     }
-    private static void transformClasses(
-            Path srcPath,
-            Path targetPath,
-            TransformerManager transformerManager
+
+    private static void transform(
+            Path classesPath,
+            TransformerManager transformerManager,
+            String mixinPackage
     ) throws IOException {
-        try (Stream<Path> stream = Files.walk(srcPath)) {
-            stream.filter(Files::isRegularFile)
-                    .filter(Files::isReadable)
+
+        Map<Path, byte[]> originalClasses = new LinkedHashMap<>();
+
+        try (Stream<Path> stream = Files.walk(classesPath)) {
+            stream
                     .filter(Transformer::isClassFile)
                     .forEach(path -> {
                         try {
-                            Path pathName = srcPath.relativize(path);
-                            String className = convRelPathToJava(pathName.toString());
-                            byte[] bytecode = Files.readAllBytes(path);
-                            byte[] transformed = transformerManager.transform(className, bytecode);
-                            if (transformed == null) {
-                                transformed = bytecode;
-                            }
-                            Path output = targetPath.resolve(pathName);
-
-                            Files.createDirectories(output.getParent());
-                            Files.write(output, transformed);
-
-                        }
-                        catch (Exception e) {
-                            System.out.println("Error: " + e.getMessage() + " run into while attempted to parse:" + path);
-                            e.printStackTrace();
+                            originalClasses.put(
+                                    path,
+                                    Files.readAllBytes(path)
+                            );
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
                         }
                     });
         }
-    }
-    private static void combineSrc(Path addonSrc, Path outSrc, String mixinPathName) throws IOException {
-        try (Stream<Path> stream = Files.walk(addonSrc)) {
-            stream.filter(Files::isRegularFile).filter(Files::isReadable).filter(Transformer::isClassFile).filter(path -> {
-                try {
-                    Path pathName = addonSrc.relativize(path);
-                    String className = convRelPathToJava(pathName.toString());
-                    return !className.equals(mixinPathName)
-                            && !className.startsWith(mixinPathName + ".");
-                }
-                catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage() + " run into while attempted to parse:" + addonSrc);
-                    e.printStackTrace();
-                }
-                return false;
-            }).forEach(
-                    path -> {
-                        String pathName = addonSrc.relativize(path).toString();
-                        Path newDir = outSrc.resolve(pathName);
-                        try {
-                            Files.createDirectories(newDir.getParent());
-                            Files.write(newDir, Files.readAllBytes(path));
-                        } catch (IOException e) {
-                            System.out.println("New Directory: " + newDir);
-                            System.out.println("Path Name: " + pathName);
-                            System.out.println("Src Path : " + path);
 
-                            throw new RuntimeException(e);
-                        }
-                    }
-            );
+        Map<Path, byte[]> transformedClasses = new LinkedHashMap<>();
+
+        for (Map.Entry<Path, byte[]> entry : originalClasses.entrySet()) {
+            Path path = entry.getKey();
+            byte[] bytecode = entry.getValue();
+
+            Path relativePath = classesPath.relativize(path);
+            String className =
+                    convRelPathToJava(relativePath.toString());
+
+            if (className.equals(mixinPackage)
+                    || className.startsWith(mixinPackage + ".")) {
+                continue;
+            }
+
+            try {
+                byte[] transformed =
+                        transformerManager.transform(
+                                className,
+                                bytecode
+                        );
+
+                if (!Arrays.equals(bytecode, transformed)) {
+                    transformedClasses.put(path, transformed);
+                }
+
+            } catch (Exception e) {
+                System.err.println(
+                        "Failed to transform: " + className
+                );
+                e.printStackTrace();
+
+                throw new RuntimeException(
+                        "Transformation failed for " + className,
+                        e
+                );
+            }
+        }
+
+        for (Map.Entry<Path, byte[]> entry
+                : transformedClasses.entrySet()) {
+            if (entry.getValue() != null) {
+                Files.write(
+                        entry.getKey(),
+                        entry.getValue()
+                );
+            }
+            else {
+                // pass because its not transformed
+                // screw you whoever has left me with this bug. I am in so much pain after searching for millenia of where this issue could be
+            }
+
         }
     }
 
-    /**
-     * Converts relative class path to java package name. im lazy, ok?
-     */
     public static String convRelPathToJava(String relativePath) {
-            return relativePath.replace('\\', '.')
+        return relativePath
+                .replace('\\', '.')
                 .replace('/', '.')
                 .replaceAll("\\.class$", "");
     }
+
     public static boolean isClassFile(Path path) {
         return Files.isRegularFile(path)
-                && path.getFileName().toString().endsWith(".class");
+                && path.getFileName()
+                .toString()
+                .endsWith(".class");
     }
 }
