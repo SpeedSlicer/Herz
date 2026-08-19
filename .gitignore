@@ -1,10 +1,9 @@
 .gradle
-build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 .kotlin
-
+build/
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
@@ -32,10 +31,8 @@ bin/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/build-tools/
 /nbdist/
 /.nb-gradle/
-
 ### VS Code ###
 .vscode/
 

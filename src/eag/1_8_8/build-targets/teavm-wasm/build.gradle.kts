@@ -18,7 +18,10 @@ java {
 sourceSets {
     named("main") {
         java.srcDirs(
-            "../../eag-1_8/src/wasm-gc-teavm/java"
+            "../../eag-1_8/src/wasm-gc-teavm/java",
+            "../teavm/src/common/java",
+            "src/java",
+
         )
         resources.srcDirs(
             "../../eag-1_8/src/teavm/resources"
@@ -40,7 +43,6 @@ dependencies {
     implementation(rootProject)
     implementation(libs.jorbis)
     implementation(libs.bundles.common)
-    implementation(project(":"))
 
 }
 
@@ -108,7 +110,7 @@ eaglercraftBuild {
             epkSources = file("../../eag-1_8/desktopRuntime/resources")
             epkOutput = file("javascript/assets.epk")
 
-            languageMetadataInput = file("../../eag-1_8/target_teavm_javascript/javascript/lang")
+            languageMetadataInput = file("../teavm-js/javascript/lang")
             languageEpkOutput = file("javascript/lang.tmp.epk")
 
             sourceGeneratorTaskName = "generateWasmGC"

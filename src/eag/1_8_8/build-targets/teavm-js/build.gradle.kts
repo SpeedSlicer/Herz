@@ -24,7 +24,11 @@ sourceSets {
     named("main") {
         java.srcDirs(
             "../../eag-1_8/src/teavm/java",
-            "../../eag-1_8/src/teavm-boot-menu/java"
+            "../../eag-1_8/src/teavm-boot-menu/java",
+            "../teavm/src/common/java",
+            "src/java",
+            "../common/src/main/java"
+
         )
         resources.srcDirs(
             "../../eag-1_8/src/teavm/resources"
@@ -39,7 +43,6 @@ dependencies {
     implementation(rootProject)
     implementation(libs.jorbis)
     implementation(libs.bundles.common)
-    implementation(project(":"))
 }
 
 val jsFolder = "javascript"

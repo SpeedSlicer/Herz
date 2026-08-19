@@ -12,8 +12,9 @@ java {
 sourceSets {
     named("main") {
         java.srcDirs(
-            "../../eag-1_8/src/lwjgl/java"
-        )
+            "../../eag-1_8/src/lwjgl/java",
+            "src/java",
+            )
     }
 }
 
@@ -29,7 +30,6 @@ dependencies {
     implementation("org.lwjgl:lwjgl-opengles")
     implementation("org.java-websocket:Java-WebSocket:1.6.0")
     implementation("dev.onvoid.webrtc:webrtc-java:0.10.0")
-    implementation(project(":"))
     implementation(
         files(
             "../../eag-1_8/desktopRuntime/codecjorbis-20101023.jar",
@@ -40,12 +40,12 @@ dependencies {
     )
 }
 
+
+
 tasks.register<JavaExec>("eaglercraftDebugRuntime") {
     group = "desktopruntime"
     description = "Runs the desktop runtime"
     classpath += sourceSets["main"].runtimeClasspath
-
-
 
     val daArgs: MutableList<String> = mutableListOf(
         "-Xmx1G",

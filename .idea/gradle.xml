@@ -49,6 +49,7 @@
             <option value="$PROJECT_DIR$/src/test/test-version/test-inner" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="true" />
         <option name="myGradleHome" value="" />
       </GradleProjectSettings>
     </option>
