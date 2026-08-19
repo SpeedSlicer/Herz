@@ -1,8 +1,5 @@
 package net.ada.api.webgui;
 
-import net.ada.api.webgui.listener.IWebGUIClickListener;
-import net.ada.api.webgui.listener.IWebGUIMoveListener;
-
 public interface IWebGUI {
     IWebGUI setHTMLComponent(String htmlComponent);
     IWebGUI setCSSComponent(String cssComponent);

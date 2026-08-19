@@ -3,6 +3,7 @@ package net.ada.api.impl.webgui;
 import net.ada.api.webgui.IWebGUI;
 import net.ada.api.webgui.IWebGUIPlatform;
 import net.ada.api.webgui.listener.IWebGUIClickListener;
+import net.ada.api.webgui.listener.IWebGUIGenericListener;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.browser.Window;
 import org.teavm.jso.dom.html.HTMLDocument;
@@ -126,11 +127,39 @@ public class JSWebGUIPlatform implements IWebGUIPlatform {
     }
 
     @Override
-    public String getValueFromTextbox(String elementID) {
+    public void addEventListener(
+            String elementId,
+            String type,
+            IWebGUIGenericListener listener
+    ) {
+        HTMLElement element = Window.current()
+                .getDocument()
+                .getElementById(elementId);
+
+        if (element == null) {
+            throw new IllegalArgumentException(
+                    "Element not found: " + elementId
+            );
+        }
+
+        element.addEventListener(type, event -> listener.run());
+    }
+
+    @Override
+    public String getValueFromElement(String elementID) {
         HTMLDocument document = HTMLDocument.current();
 
         HTMLInputElement myTextBox = (HTMLInputElement) document.getElementById(elementID);
 
         return myTextBox.getValue();
+    }
+
+    @Override
+    public String getInnerHTMLFromElement(String elementID) {
+        HTMLDocument document = HTMLDocument.current();
+
+        HTMLInputElement myTextBox = (HTMLInputElement) document.getElementById(elementID);
+
+        return myTextBox.getInnerHTML();
     }
 }

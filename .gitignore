@@ -31,10 +31,8 @@ bin/
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
-/build-tools/
 /nbdist/
 /.nb-gradle/
-
 ### VS Code ###
 .vscode/
 

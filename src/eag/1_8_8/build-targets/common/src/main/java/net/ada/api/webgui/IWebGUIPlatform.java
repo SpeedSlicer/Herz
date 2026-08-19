@@ -1,6 +1,9 @@
 package net.ada.api.webgui;
 
-import net.ada.api.webgui.listener.IWebGUIClickListener; /**
+import net.ada.api.webgui.listener.IWebGUIClickListener;
+import net.ada.api.webgui.listener.IWebGUIGenericListener;
+
+/**
  * This is the JANKIEST thing I have ever written. Good luck, developers.
  */
 public interface IWebGUIPlatform {
@@ -13,5 +16,13 @@ public interface IWebGUIPlatform {
             IWebGUIClickListener listener
     );
 
-    String getValueFromTextbox(String elementID);
+    void addEventListener(
+            String elementId,
+            String type,
+            IWebGUIGenericListener listener
+    );
+
+    String getValueFromElement(String elementID);
+
+    String getInnerHTMLFromElement(String elementID);
 }
