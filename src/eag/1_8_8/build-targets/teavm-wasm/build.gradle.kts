@@ -111,7 +111,7 @@ eaglercraftBuild {
             epkSources = file("../../eag-1_8/desktopRuntime/resources")
             epkOutput = file("javascript/assets.epk")
 
-            languageMetadataInput = file("../../eag-1_8/target_teavm_javascript/javascript/lang")
+            languageMetadataInput = file("../teavm-js/javascript/lang")
             languageEpkOutput = file("javascript/lang.tmp.epk")
 
             sourceGeneratorTaskName = "generateWasmGC"

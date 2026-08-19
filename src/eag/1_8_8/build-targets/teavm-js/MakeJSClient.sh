@@ -1,2 +1,2 @@
 cd ../../
-sudo ./gradlew build-targets:teavm-js:generateJavaScript
+./gradlew build-targets:teavm-js:generateJavaScript

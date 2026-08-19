@@ -1,2 +1,2 @@
 cd ../../
-sudo ./gradlew build-targets:teavm-wasm:makeMainWasmClientBundle
+./gradlew build-targets:teavm-wasm:makeMainWasmClientBundle

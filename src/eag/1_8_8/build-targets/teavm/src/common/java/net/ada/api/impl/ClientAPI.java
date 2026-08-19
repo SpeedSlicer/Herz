@@ -1,7 +1,6 @@
 package net.ada.api.impl;
 
 import net.ada.api.impl.webgui.JSWebGUIPlatform;
-import net.ada.api.webgui.IWebGUI;
 import net.ada.api.webgui.IWebGUIPlatform;
 
 public class ClientAPI {
