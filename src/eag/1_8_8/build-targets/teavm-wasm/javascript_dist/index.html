@@ -53,5 +53,49 @@
 			});
 		</script>
 	</head>
-	<body style="margin:0px;width:100%;height:100%;overflow:hidden;background-color:black;" id="game_frame"></body>
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			overflow: hidden;
+		}
+
+		#game_frame {
+			position: fixed;
+			inset: 0;
+
+			width: 100vw;
+			height: 100vh;
+
+			margin: 0;
+			padding: 0;
+
+			overflow: hidden;
+			background: black;
+
+			transform: none;
+			z-index: 0;
+		}
+
+		.herz-overlay {
+			position: fixed;
+			inset: 0;
+			z-index: 1000;
+			pointer-events: none;
+		}
+
+		.herz-gui {
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+	</style>
+	<body>
+	<div id="game_frame">
+	</div>
+	<div class="herz-overlay" id="bs"></div>
+	</body>
+
 </html>
