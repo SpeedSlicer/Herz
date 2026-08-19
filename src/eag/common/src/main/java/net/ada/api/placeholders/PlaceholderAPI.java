@@ -1,9 +1,12 @@
 package net.ada.api.placeholders;
 
+import jdk.jfr.Experimental;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
-
+/* TODO Complete */
+@Experimental
 public class PlaceholderAPI {
 
     private static final Map<String, PlaceholderCallback> placeholders = new HashMap<>();

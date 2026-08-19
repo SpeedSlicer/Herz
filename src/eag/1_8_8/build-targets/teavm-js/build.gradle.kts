@@ -43,7 +43,6 @@ dependencies {
     implementation(rootProject)
     implementation(libs.jorbis)
     implementation(libs.bundles.common)
-    implementation(project(":"))
 }
 
 val jsFolder = "javascript"

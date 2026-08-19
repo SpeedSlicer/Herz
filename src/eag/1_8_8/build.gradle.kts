@@ -58,7 +58,7 @@ val javaLauncher = javaToolchains.launcherFor {
 	languageVersion.set(JavaLanguageVersion.of(17))
 }
 
-val syncHerzAssets by tasks.registering(Sync::class) {
+val syncHerzAssets = tasks.register<Sync>("syncHerzAssets") {
 	from(file("resources/assets/herz"))
 	into(file("eag-1_8/desktopRuntime/resources/assets/herz"))
 }
@@ -93,4 +93,17 @@ tasks.withType<Jar> {
 			exclude(path.substring(0, path.length - 5) + ".class")
 		}
 	}
+}
+
+tasks.register("buildAllPlatforms") {
+	group = "build"
+	description = "Builds the common, LWJGL, TeaVM JavaScript, and TeaVM WASM jars."
+
+	dependsOn(
+		tasks.named("jar"),
+		":build-targets:common:jar",
+		":build-targets:lwjgl:jar",
+		":build-targets:teavm-js:jar",
+		":build-targets:teavm-wasm:jar"
+	)
 }

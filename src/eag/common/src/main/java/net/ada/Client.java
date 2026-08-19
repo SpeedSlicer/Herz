@@ -6,6 +6,7 @@ public class Client {
     public static Client INSTANCE;
 
     ClientAPI clientAPI;
+
     public Client() {
         if (INSTANCE == null) {
             INSTANCE = this;
@@ -19,4 +20,5 @@ public class Client {
     public ClientAPI getClientAPI() {
         return clientAPI;
     }
+
 }

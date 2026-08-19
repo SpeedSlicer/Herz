@@ -9,11 +9,15 @@ repositories {
     mavenCentral()
 }
 
+val sharedMainJava = file("../../../common/src/main/java")
+val sharedPlatformApi = file("../../../common/src/platform-api/java")
+
 sourceSets {
     main {
         java.srcDirs(
             "src/main/java",
-            "src/platform-api/java",
+            sharedMainJava,
+            sharedPlatformApi,
         )
     }
 }
@@ -22,17 +26,19 @@ dependencies {
     implementation(project(path = ":", configuration = "unprocessedClasses"))
 }
 
-val platformApiClassPatterns = fileTree("src/platform-api/java")
+val platformApiClassPatterns = fileTree(sharedPlatformApi)
     .matching { include("**/*.java") }
     .files
     .map { sourceFile ->
-        val relativePath = sourceFile.relativeTo(file("src/platform-api/java"))
+        val relativePath = sourceFile.relativeTo(sharedPlatformApi)
             .invariantSeparatorsPath
             .removeSuffix(".java")
         "$relativePath*.class"
     }
 
 tasks.named<JavaCompile>("compileJava") {
+    outputs.upToDateWhen { false }
+
     doLast {
         delete(fileTree(destinationDirectory) {
             platformApiClassPatterns.forEach(::include)
@@ -44,7 +50,7 @@ tasks.withType<Jar> {
     entryCompression = ZipEntryCompression.STORED
     // TeaVM will fail if anything from platform-api is in the JAR
 
-    fileTree("src/platform-api/java").visit {
+    fileTree(sharedPlatformApi).visit {
         if (!isDirectory) {
             if (path.endsWith(".java")) {
                 exclude(path.substring(0, path.length - 5) + ".class")
